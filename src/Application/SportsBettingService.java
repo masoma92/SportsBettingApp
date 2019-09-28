@@ -97,4 +97,8 @@ public class SportsBettingService {
         this.builder.addEvent(fse);
         return builder.getEvents();
     }
+
+    public void saveWager(Wager wager){
+        this.builder.setWager(wager);
+    }
 }

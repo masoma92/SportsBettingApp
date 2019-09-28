@@ -1,6 +1,12 @@
 package Application;
 
 import Model.Builders.PlayerBuilder;
+import Model.Outcome;
+import Model.OutcomeOdd;
+import Model.SportEvent;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public class App {
 
@@ -16,7 +22,11 @@ public class App {
     }
 
     private void doBetting(){
-        view.printOutcomeOdds(this.service.findAllSportEvents());
+        List<SportEvent> events = this.service.findAllSportEvents();
+        view.printOutcomeOdds(events);
+        OutcomeOdd oc = view.selectOutcomeOdd(events);
+        BigDecimal amount = view.readWagerAmout();
+
     }
 
     private void calculateResults(){
