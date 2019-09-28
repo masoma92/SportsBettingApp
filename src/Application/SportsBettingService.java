@@ -37,26 +37,62 @@ public class SportsBettingService {
         LocalDateTime matchStartDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 18, 55, 00);
         LocalDateTime matchEndDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 40, 00);
 
+        BetBuilder bb = new BetBuilder();
+        BetBuilder bb2 = new BetBuilder();
+        OutcomeBuilder ocb = new OutcomeBuilder();
+        OutcomeBuilder ocb2 = new OutcomeBuilder();
+        OutcomeBuilder ocb3 = new OutcomeBuilder();
+        OutcomeBuilder ocb4 = new OutcomeBuilder();
         OutcomeOddBuilder oob = new OutcomeOddBuilder();
+
         OutcomeOdd oo = oob.setValue(new BigDecimal(1.5))
                 .setValidFrom(matchStartDate)
                 .setValidUntil(matchEndDate)
                 .getOutcomeOdd();
 
-        BetBuilder bb = new BetBuilder();
-        bb.setDescription("winner")
-                .setType(BetType.WINNER);
+        OutcomeOdd oo2 = oob.setValue(new BigDecimal(2))
+                .setValidFrom(matchStartDate)
+                .setValidUntil(matchEndDate)
+                .getOutcomeOdd();
 
-        OutcomeBuilder ocb = new OutcomeBuilder();
+        OutcomeOdd oo3 = oob.setValue(new BigDecimal(2.5))
+                .setValidFrom(matchStartDate)
+                .setValidUntil(matchEndDate)
+                .getOutcomeOdd();
+
+        OutcomeOdd oo4 = oob.setValue(new BigDecimal(3))
+                .setValidFrom(matchStartDate)
+                .setValidUntil(matchEndDate)
+                .getOutcomeOdd();
+
         Outcome oc = ocb.setDescription("Borussia Dortmund")
-                .setBet(bb.getBet())
                 .addOutcomeOdd(oo)
                 .getOutcome();
+        Outcome oc2 = ocb2.setDescription("Salvia Praha")
+                .addOutcomeOdd(oo2)
+                .getOutcome();
+        Outcome oc3 = ocb3.setDescription("3 goals")
+                .addOutcomeOdd(oo3)
+                .getOutcome();
+        Outcome oc4 = ocb4.setDescription("4 goals")
+                .addOutcomeOdd(oo4)
+                .getOutcome();
 
-        Bet b = bb.addOutcome(oc).getBet();
+        Bet bet1 = bb.setDescription("winner")
+                .setType(BetType.WINNER)
+                .addOutcome(oc)
+                .addOutcome(oc2)
+                .getBet();
+
+        Bet bet2 = bb2.setDescription("number of goals")
+                .setType(BetType.GOALS)
+                .addOutcome(oc3)
+                .addOutcome(oc4)
+                .getBet();
 
         FootballSportEvent fse = new FootballSportEvent("Salvia Praha vs Borussia Dortmund", matchStartDate, matchEndDate);
-        fse.addBet(b);
+        fse.addBet(bet1);
+        fse.addBet(bet2);
 
         this.builder.addEvent(fse);
         return builder.getEvents();

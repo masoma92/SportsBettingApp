@@ -30,6 +30,10 @@ public class Bet {
         }
     }
 
+    public void addOutCome(Outcome outcome){
+        this.outcomes.add(outcome);
+    }
+
     public List<Outcome> getOutcomes() {
         return outcomes;
     }
