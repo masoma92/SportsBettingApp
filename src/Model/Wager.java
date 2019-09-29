@@ -34,5 +34,39 @@ public class Wager {
         this.currency = builder.getCurrency();
     }
 
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
 
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public LocalDateTime getTimestampCreated() {
+        return timestampCreated;
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public OutcomeOdd getOdd() {
+        return odd;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
 }

@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
 
 public class SportsBettingService {
 
@@ -99,6 +101,46 @@ public class SportsBettingService {
     }
 
     public void saveWager(Wager wager){
-        this.builder.setWager(wager);
+        BigDecimal newBalance = wager.getPlayer().getBalance().subtract(wager.getAmount());
+        this.builder.getPlayer().setBalance(newBalance);
+        this.builder.addWager(wager);
+    }
+
+    public List<Wager> findAllWagers(){
+        return this.builder.getWagers();
+    }
+
+    public void calculateResults(){
+        List<Wager> wagers = this.builder.getWagers();
+
+        Random rand = new Random();
+
+        List<Outcome> winnerOutcomes = new ArrayList<>();
+        List<OutcomeOdd> winnerOutcomeOdds = new ArrayList<>();
+
+        //kiválasztja a nyerő kimeneteleket
+        for (Bet b : this.builder.getEvents().get(0).getBets()){
+            for (Outcome o : b.getOutcomes()){
+                if(rand.nextInt(1) == 0){
+                    winnerOutcomeOdds.add(o.getOutcomeOdds().get(rand.nextInt(o.getOutcomeOdds().size())));
+                    winnerOutcomes.add(o);
+                    break;
+                }
+            }
+        }
+
+        //ezt lehetne használni az alábbi ciklusban
+        this.builder.getEvents().get(0).setResult(new Result(winnerOutcomes));
+
+        //kiválasztja a nyerő oddsokat a kimeneteleken belül
+        for (OutcomeOdd o : winnerOutcomeOdds){
+            for (Wager w : wagers){
+                if (w.getOdd() == o){
+                    w.setWin(true);
+                    BigDecimal newBalance = w.getPlayer().getBalance().add(w.getOdd().getValue().multiply(w.getAmount()));
+                    w.getPlayer().setBalance(newBalance);
+                }
+            }
+        }
     }
 }

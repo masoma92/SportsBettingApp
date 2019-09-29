@@ -30,6 +30,18 @@ public class Bet {
         }
     }
 
+    public SportEvent getEvent() {
+        return event;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BetType getType() {
+        return type;
+    }
+
     public void addOutCome(Outcome outcome){
         this.outcomes.add(outcome);
     }

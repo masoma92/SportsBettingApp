@@ -20,7 +20,6 @@ public abstract class SportEvent {
         for(Bet b : bets){
             b.setEvent(this);
         }
-        result = new Result(); //sport event result
     }
 
     public void setResult(Result result) {
@@ -48,8 +47,11 @@ public abstract class SportEvent {
     }
 
     public void addBet(Bet bet){
+        bet.setEvent(this);
         this.bets.add(bet);
     }
+
+
 
     @Override
     public String toString() {

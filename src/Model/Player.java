@@ -42,4 +42,8 @@ public class Player extends User{
     public Currency getCurrency() {
         return currency;
     }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 }

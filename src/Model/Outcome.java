@@ -37,6 +37,14 @@ public class Outcome {
         return outcomeOdds;
     }
 
+    public Bet getBet() {
+        return bet;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 
 
     public void addOutcomeOdds(OutcomeOdd outcomeOdd){

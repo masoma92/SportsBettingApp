@@ -7,8 +7,8 @@ public final class Result {
 
     List<Outcome> winnerOutcomes; //1 event all outcomes
 
-    public Result(){
-        this.winnerOutcomes = new ArrayList<Outcome>();
+    public Result(List<Outcome> winnerOutcomes){
+        this.winnerOutcomes = winnerOutcomes;
     }
 
     public List<Outcome> getWinnerOutcomes() {

@@ -27,6 +27,14 @@ public class OutcomeOdd {
         this.outcome = outcome;
     }
 
+    public Outcome getOutcome() {
+        return outcome;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return "Actual odd: " + value + ", Valid between: " + validFrom.toString() + ", Valid until: " + validUntil.toString() + "\n";

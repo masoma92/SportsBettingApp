@@ -11,10 +11,11 @@ public class DataBuilder {
 
     List<SportEvent> events;
     Player player;
-    Wager wager;
+    List<Wager> wagers;
 
     public DataBuilder() {
         events = new ArrayList<>();
+        wagers = new ArrayList<>();
     }
 
     public DataBuilder setPlayer(Player player){
@@ -22,8 +23,8 @@ public class DataBuilder {
         return this;
     }
 
-    public DataBuilder setWager(Wager player){
-        this.wager = wager;
+    public DataBuilder addWager(Wager wager){
+        this.wagers.add(wager);
         return this;
     }
 
@@ -38,5 +39,9 @@ public class DataBuilder {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public List<Wager> getWagers() {
+        return wagers;
     }
 }

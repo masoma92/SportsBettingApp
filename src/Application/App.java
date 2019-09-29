@@ -1,12 +1,19 @@
 package Application;
 
 import Model.Builders.PlayerBuilder;
+import Model.Builders.WagerBuilder;
 import Model.Outcome;
 import Model.OutcomeOdd;
 import Model.SportEvent;
+import Model.Wager;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.util.jar.Attributes;
 
 public class App {
 
@@ -23,18 +30,34 @@ public class App {
 
     private void doBetting(){
         List<SportEvent> events = this.service.findAllSportEvents();
-        view.printOutcomeOdds(events);
-        OutcomeOdd oc = view.selectOutcomeOdd(events);
-        BigDecimal amount = view.readWagerAmout();
-
+        while (true){
+            view.printOutcomeOdds(events);
+            OutcomeOdd oc = view.selectOutcomeOdd(events);
+            if (oc == null) break;
+            BigDecimal amount = view.readWagerAmout();
+            if (this.service.builder.getPlayer().getBalance().compareTo(amount) > 0){
+                Wager wager = new WagerBuilder()
+                        .setAmout(amount)
+                        .setOutcomeOdd(oc)
+                        .setPlayer(this.service.builder.getPlayer())
+                        .setCurrency(this.service.builder.getPlayer().getCurrency())
+                        .getWager();
+                this.service.saveWager(wager);
+                this.view.printWagerSaved(wager);
+                this.view.printBalance(this.service.builder.getPlayer());
+            }
+            else{
+                this.view.printNotEnoughBalance(this.service.builder.getPlayer());
+            }
+        }
     }
 
     private void calculateResults(){
-
+        this.service.calculateResults();
     }
 
     private void printResults(){
-
+        this.view.printResults(this.service.builder.getPlayer(), this.service.builder.getWagers());
     }
 
     SportsBettingService service;
@@ -48,6 +71,8 @@ public class App {
     public void play(){
         createPlayer();
         doBetting();
+        calculateResults();
+        printResults();
     }
 
 

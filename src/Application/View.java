@@ -56,22 +56,28 @@ public class View {
     }
 
     public void printOutcomeOdds(List<SportEvent> events){
-        System.out.println("What are you want to bet on?");
+        System.out.println("What are you want to bet on? (choose a number or press q for quit)");
         for(SportEvent se : events){
             System.out.println(se);
         }
     }
 
     public OutcomeOdd selectOutcomeOdd(List<SportEvent> events){
-        int input = Integer.parseInt(in.nextLine());
-        int i = 0;
+        String input = in.nextLine();
+        if (input.equals("q")){
+            return null;
+        }
+        else {
+            int inputnum = Integer.parseInt(input);
+            int i = 0;
 
-        for (SportEvent e : events){
-            for (Bet b : e.getBets()){
-                for (Outcome o : b.getOutcomes()){
-                    for (OutcomeOdd od : o.getOutcomeOdds()){
-                        if (++i == input){
-                            return od;
+            for (SportEvent e : events){
+                for (Bet b : e.getBets()){
+                    for (Outcome o : b.getOutcomes()){
+                        for (OutcomeOdd od : o.getOutcomeOdds()){
+                            if (++i == inputnum){
+                                return od;
+                            }
                         }
                     }
                 }
@@ -83,5 +89,23 @@ public class View {
     public BigDecimal readWagerAmout(){
         System.out.println("What amount do you wish to bet on it?");
         return new BigDecimal(in.nextLine());
+    }
+
+    public void printWagerSaved(Wager wager){
+        System.out.println("Wager: " + wager.getOdd().getOutcome().getBet().getType() + " = " + wager.getOdd().getOutcome().getDescription()
+                + ", Event: " + wager.getOdd().getOutcome().getBet().getEvent().getTitle() + " [odd: " + wager.getOdd().getValue() + ", amount: " +
+                wager.getAmount()+"] saved!");
+    }
+
+    public void printNotEnoughBalance(Player player){
+        System.out.println("You don't have enough money, your balance is " + player.getBalance() + " " + player.getCurrency());
+    }
+
+    public void printResults(Player player, List<Wager> wagers){
+        System.out.println("Results: ");
+        for(Wager w : wagers){
+            printWagerSaved(w);
+        }
+        printBalance(player);
     }
 }
