@@ -92,9 +92,13 @@ public class View {
     }
 
     public void printWagerSaved(Wager wager){
+        String ending = wager.isProcessed() ? "" : " saved";
+        if (ending.equals("")){
+            ending = wager.isWin() ? "win: true" : "win: false";
+        }
         System.out.println("Wager: " + wager.getOdd().getOutcome().getBet().getType() + " = " + wager.getOdd().getOutcome().getDescription()
                 + ", Event: " + wager.getOdd().getOutcome().getBet().getEvent().getTitle() + " [odd: " + wager.getOdd().getValue() + ", amount: " +
-                wager.getAmount()+"] saved!");
+                wager.getAmount()+"]" + ending);
     }
 
     public void printNotEnoughBalance(Player player){

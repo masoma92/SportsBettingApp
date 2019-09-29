@@ -103,6 +103,7 @@ public class SportsBettingService {
     public void saveWager(Wager wager){
         BigDecimal newBalance = wager.getPlayer().getBalance().subtract(wager.getAmount());
         this.builder.getPlayer().setBalance(newBalance);
+        wager.setProcessed(true);
         this.builder.addWager(wager);
     }
 

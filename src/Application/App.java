@@ -30,20 +30,20 @@ public class App {
 
     private void doBetting(){
         List<SportEvent> events = this.service.findAllSportEvents();
-        while (true){
+        while (this.service.builder.getPlayer().getBalance().compareTo(BigDecimal.ZERO) > 0){
             view.printOutcomeOdds(events);
             OutcomeOdd oc = view.selectOutcomeOdd(events);
             if (oc == null) break;
             BigDecimal amount = view.readWagerAmout();
-            if (this.service.builder.getPlayer().getBalance().compareTo(amount) > 0){
+            if (this.service.builder.getPlayer().getBalance().compareTo(amount) >= 0){
                 Wager wager = new WagerBuilder()
                         .setAmout(amount)
                         .setOutcomeOdd(oc)
                         .setPlayer(this.service.builder.getPlayer())
                         .setCurrency(this.service.builder.getPlayer().getCurrency())
                         .getWager();
-                this.service.saveWager(wager);
                 this.view.printWagerSaved(wager);
+                this.service.saveWager(wager);
                 this.view.printBalance(this.service.builder.getPlayer());
             }
             else{
