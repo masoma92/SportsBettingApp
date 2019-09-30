@@ -1,19 +1,12 @@
-package Application;
+package application;
 
-import Model.Builders.PlayerBuilder;
-import Model.Builders.WagerBuilder;
-import Model.Outcome;
-import Model.OutcomeOdd;
-import Model.SportEvent;
-import Model.Wager;
+import model.builders.WagerBuilder;
+import model.OutcomeOdd;
+import model.SportEvent;
+import model.Wager;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicReferenceArray;
-import java.util.jar.Attributes;
 
 public class App {
 
@@ -60,15 +53,15 @@ public class App {
         this.view.printResults(this.service.builder.getPlayer(), this.service.builder.getWagers());
     }
 
-    SportsBettingService service;
-    View view;
+    private SportsBettingService service;
+    private View view;
 
     public App(SportsBettingService service, View view) {
         this.service = service;
         this.view = view;
     }
 
-    public void play(){
+    private void play(){
         createPlayer();
         doBetting();
         calculateResults();

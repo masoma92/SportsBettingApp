@@ -1,19 +1,19 @@
-package Model.Builders;
+package model.builders;
 
-import Model.Bet;
-import Model.BetType;
-import Model.Outcome;
-import Model.SportEvent;
+import model.Bet;
+import model.BetType;
+import model.Outcome;
+import model.SportEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BetBuilder {
 
-    String description; //eg.:number of goals
-    BetType type;
-    SportEvent event;
-    List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
+    private String description; //eg.:number of goals
+    private BetType type;
+    private SportEvent event;
+    private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
 
     public BetBuilder() {
         this.outcomes = new ArrayList<>();

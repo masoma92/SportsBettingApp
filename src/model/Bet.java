@@ -1,15 +1,15 @@
-package Model;
+package model;
 
-import Model.Builders.BetBuilder;
+import model.builders.BetBuilder;
 
 import java.util.List;
 
 
 public class Bet {
-    String description; //eg.:number of goals
-    BetType type;
-    SportEvent event;
-    List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
+    private String description; //eg.:number of goals
+    private BetType type;
+    private SportEvent event;
+    private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
 
     public Bet(String description, BetType type, List<Outcome> outcomes) {
         this.description = description;

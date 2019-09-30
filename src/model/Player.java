@@ -1,17 +1,17 @@
-package Model;
+package model;
 
-import Application.App;
-import Model.Builders.PlayerBuilder;
+import application.App;
+import model.builders.PlayerBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Player extends User{
-    String name;
-    Integer accountNumber;
-    BigDecimal balance;
-    LocalDate birth;
-    Currency currency;
+    private String name;
+    private Integer accountNumber;
+    private BigDecimal balance;
+    private LocalDate birth;
+    private Currency currency;
 
     public Player(String email, String password, String name, LocalDate birth, Currency currency) {
         super(email, password);

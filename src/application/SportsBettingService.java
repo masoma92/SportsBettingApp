@@ -1,16 +1,15 @@
-package Application;
+package application;
 
-import Model.*;
-import Model.Builders.BetBuilder;
-import Model.Builders.DataBuilder;
-import Model.Builders.OutcomeBuilder;
-import Model.Builders.OutcomeOddBuilder;
+import model.*;
+import model.builders.BetBuilder;
+import model.builders.DataBuilder;
+import model.builders.OutcomeBuilder;
+import model.builders.OutcomeOddBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -111,6 +110,8 @@ public class SportsBettingService {
         return this.builder.getWagers();
     }
 
+
+
     public void calculateResults(){
         List<Wager> wagers = this.builder.getWagers();
 
@@ -143,5 +144,7 @@ public class SportsBettingService {
                 }
             }
         }
+
+
     }
 }

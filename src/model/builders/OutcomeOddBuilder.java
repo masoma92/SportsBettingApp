@@ -1,16 +1,16 @@
-package Model.Builders;
+package model.builders;
 
-import Model.Outcome;
-import Model.OutcomeOdd;
+import model.Outcome;
+import model.OutcomeOdd;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OutcomeOddBuilder {
-    BigDecimal value; //winning*
-    LocalDateTime validFrom; //this value valid from
-    LocalDateTime validUntil; //this value valid until
-    Outcome outcome;
+    private BigDecimal value; //winning*
+    private LocalDateTime validFrom; //this value valid from
+    private LocalDateTime validUntil; //this value valid until
+    private Outcome outcome;
 
     public OutcomeOddBuilder() {
     }

@@ -1,17 +1,15 @@
-package Model.Builders;
+package model.builders;
 
-import Model.*;
+import model.*;
 
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataBuilder {
 
-    List<SportEvent> events;
-    Player player;
-    List<Wager> wagers;
+    private List<SportEvent> events;
+    private Player player;
+    private List<Wager> wagers;
 
     public DataBuilder() {
         events = new ArrayList<>();

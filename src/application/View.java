@@ -1,7 +1,7 @@
-package Application;
+package application;
 
-import Model.*;
-import Model.Builders.PlayerBuilder;
+import model.*;
+import model.builders.PlayerBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;

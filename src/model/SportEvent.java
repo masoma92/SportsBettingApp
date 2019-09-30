@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,11 +6,11 @@ import java.util.List;
 
 public abstract class SportEvent {
 
-    String title;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
-    Result result;
-    List<Bet> bets;
+    private String title;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private Result result;
+    private List<Bet> bets;
 
     public SportEvent(String title, LocalDateTime startDate, LocalDateTime endDate) {
         this.title = title; //sport event name

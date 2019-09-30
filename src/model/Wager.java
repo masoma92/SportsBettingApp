@@ -1,18 +1,18 @@
-package Model;
+package model;
 
-import Model.Builders.WagerBuilder;
+import model.builders.WagerBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Wager {
-    BigDecimal amount;
-    LocalDateTime timestampCreated; //when the wager created
-    boolean processed; //true if it has paid
-    boolean win; //true if player has won
-    Player player;
-    OutcomeOdd odd;
-    Currency currency;
+    private BigDecimal amount;
+    private LocalDateTime timestampCreated; //when the wager created
+    private boolean processed; //true if it has paid
+    private boolean win; //true if player has won
+    private Player player;
+    private OutcomeOdd odd;
+    private Currency currency;
 
     public Wager(BigDecimal amount, Player player, OutcomeOdd odd, Currency currency) {
         this.amount = amount;

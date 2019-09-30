@@ -1,16 +1,16 @@
-package Model.Builders;
+package model.builders;
 
-import Model.Bet;
-import Model.Outcome;
-import Model.OutcomeOdd;
+import model.Bet;
+import model.Outcome;
+import model.OutcomeOdd;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OutcomeBuilder {
-    String description; //eg.: 0 goal or 1 goal etc.
-    Bet bet;
-    List<OutcomeOdd> outcomeOdds;
+    private String description; //eg.: 0 goal or 1 goal etc.
+    private Bet bet;
+    private List<OutcomeOdd> outcomeOdds;
 
     public OutcomeBuilder() {
         this.outcomeOdds = new ArrayList<>();

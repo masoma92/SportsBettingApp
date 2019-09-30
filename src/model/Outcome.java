@@ -1,15 +1,14 @@
-package Model;
+package model;
 
 
-import Model.Builders.OutcomeBuilder;
+import model.builders.OutcomeBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Outcome {
-    String description; //eg.: 0 goal or 1 goal etc.
-    Bet bet;
-    List<OutcomeOdd> outcomeOdds;
+    private String description; //eg.: 0 goal or 1 goal etc.
+    private Bet bet;
+    private List<OutcomeOdd> outcomeOdds;
 
     public Outcome(String description, Bet bet, List<OutcomeOdd> outcomeOdds) {
         this.description = description;

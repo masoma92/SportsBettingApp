@@ -1,18 +1,18 @@
-package Model.Builders;
+package model.builders;
 
-import Model.Currency;
-import Model.Player;
+import model.Currency;
+import model.Player;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PlayerBuilder {
-    String name;
-    LocalDate birth;
-    Currency currency;
-    BigDecimal balance;
-    String email;
-    String password;
+    private String name;
+    private LocalDate birth;
+    private Currency currency;
+    private BigDecimal balance;
+    private String email;
+    private String password;
 
     public PlayerBuilder() {
     }
