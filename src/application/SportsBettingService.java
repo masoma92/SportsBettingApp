@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class SportsBettingService {
 
-    DataBuilder builder;
+    private DataBuilder builder;
 
     public SportsBettingService() {
         this.builder = new DataBuilder();

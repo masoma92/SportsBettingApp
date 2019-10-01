@@ -23,24 +23,24 @@ public class App {
 
     private void doBetting(){
         List<SportEvent> events = this.service.findAllSportEvents();
-        while (this.service.builder.getPlayer().getBalance().compareTo(BigDecimal.ZERO) > 0){
+        while (this.service.getBuilder().getPlayer().getBalance().compareTo(BigDecimal.ZERO) > 0){
             view.printOutcomeOdds(events);
             OutcomeOdd oc = view.selectOutcomeOdd(events);
             if (oc == null) break;
             BigDecimal amount = view.readWagerAmout();
-            if (this.service.builder.getPlayer().getBalance().compareTo(amount) >= 0){
+            if (this.service.getBuilder().getPlayer().getBalance().compareTo(amount) >= 0){
                 Wager wager = new WagerBuilder()
                         .setAmout(amount)
                         .setOutcomeOdd(oc)
-                        .setPlayer(this.service.builder.getPlayer())
-                        .setCurrency(this.service.builder.getPlayer().getCurrency())
+                        .setPlayer(this.service.getBuilder().getPlayer())
+                        .setCurrency(this.service.getBuilder().getPlayer().getCurrency())
                         .getWager();
                 this.view.printWagerSaved(wager);
                 this.service.saveWager(wager);
-                this.view.printBalance(this.service.builder.getPlayer());
+                this.view.printBalance(this.service.getBuilder().getPlayer());
             }
             else{
-                this.view.printNotEnoughBalance(this.service.builder.getPlayer());
+                this.view.printNotEnoughBalance(this.service.getBuilder().getPlayer());
             }
         }
     }
@@ -50,7 +50,7 @@ public class App {
     }
 
     private void printResults(){
-        this.view.printResults(this.service.builder.getPlayer(), this.service.builder.getWagers());
+        this.view.printResults(this.service.getBuilder().getPlayer(), this.service.getBuilder().getWagers());
     }
 
     private SportsBettingService service;
