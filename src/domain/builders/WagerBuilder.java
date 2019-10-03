@@ -1,9 +1,9 @@
-package model.builders;
+package domain.builders;
 
-import model.Currency;
-import model.OutcomeOdd;
-import model.Player;
-import model.Wager;
+import domain.Currency;
+import domain.OutcomeOdd;
+import domain.Player;
+import domain.Wager;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

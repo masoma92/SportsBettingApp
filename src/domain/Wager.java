@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import model.builders.WagerBuilder;
+import domain.builders.WagerBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

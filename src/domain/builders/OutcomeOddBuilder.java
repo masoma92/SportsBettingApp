@@ -1,7 +1,7 @@
-package model.builders;
+package domain.builders;
 
-import model.Outcome;
-import model.OutcomeOdd;
+import domain.Outcome;
+import domain.OutcomeOdd;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

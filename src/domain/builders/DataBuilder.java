@@ -1,6 +1,6 @@
-package model.builders;
+package domain.builders;
 
-import model.*;
+import domain.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package model.builders;
+package domain.builders;
 
-import model.Bet;
-import model.BetType;
-import model.Outcome;
-import model.SportEvent;
+import domain.Bet;
+import domain.BetType;
+import domain.Outcome;
+import domain.SportEvent;
 
 import java.util.ArrayList;
 import java.util.List;

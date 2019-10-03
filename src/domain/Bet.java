@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import model.builders.BetBuilder;
+import domain.builders.BetBuilder;
 
 import java.util.List;
 

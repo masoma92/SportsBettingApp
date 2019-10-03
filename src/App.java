@@ -1,19 +1,14 @@
-package application;
-
-import model.builders.WagerBuilder;
-import model.OutcomeOdd;
-import model.SportEvent;
-import model.Wager;
+import service.SportsBettingService;
+import view.View;
+import domain.builders.WagerBuilder;
+import domain.OutcomeOdd;
+import domain.SportEvent;
+import domain.Wager;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class App {
-
-    static public int accountNumber = 0;
-    static public int getAccountNumber(){
-        return App.accountNumber++;
-    }
 
     private void createPlayer(){
         service.savePlayer(this.view.readPlayerData());

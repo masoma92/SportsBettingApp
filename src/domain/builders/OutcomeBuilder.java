@@ -1,8 +1,8 @@
-package model.builders;
+package domain.builders;
 
-import model.Bet;
-import model.Outcome;
-import model.OutcomeOdd;
+import domain.Bet;
+import domain.Outcome;
+import domain.OutcomeOdd;
 
 import java.util.ArrayList;
 import java.util.List;

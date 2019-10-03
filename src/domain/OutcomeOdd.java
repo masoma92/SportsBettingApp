@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import model.builders.OutcomeOddBuilder;
+import domain.builders.OutcomeOddBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

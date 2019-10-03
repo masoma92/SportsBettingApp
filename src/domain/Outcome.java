@@ -1,7 +1,7 @@
-package model;
+package domain;
 
 
-import model.builders.OutcomeBuilder;
+import domain.builders.OutcomeBuilder;
 
 import java.util.List;
 

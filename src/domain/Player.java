@@ -1,12 +1,16 @@
-package model;
+package domain;
 
-import application.App;
-import model.builders.PlayerBuilder;
+import domain.builders.PlayerBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Player extends User{
+    static public int accNum = 0;
+    static public int getAccountNumber(){
+        return accNum++;
+    }
+
     private String name;
     private Integer accountNumber;
     private BigDecimal balance;
@@ -17,7 +21,7 @@ public class Player extends User{
         super(email, password);
         this.name = name;
         this.balance = BigDecimal.valueOf(0.0);
-        this.accountNumber = App.getAccountNumber();
+        this.accountNumber = this.getAccountNumber();
         this.birth = birth;
         this.currency = currency;
     }
@@ -25,7 +29,7 @@ public class Player extends User{
     public Player(PlayerBuilder builder){
         super(builder.getEmail(), builder.getPassword());
         this.name = builder.getName();
-        this.accountNumber = App.getAccountNumber();
+        this.accountNumber = this.getAccountNumber();
         this.balance = builder.getBalance();
         this.birth = builder.getBirth();
         this.currency = builder.getCurrency();

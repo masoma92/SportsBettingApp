@@ -1,7 +1,7 @@
-package model.builders;
+package domain.builders;
 
-import model.Currency;
-import model.Player;
+import domain.Currency;
+import domain.Player;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

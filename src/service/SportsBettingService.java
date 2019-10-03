@@ -1,10 +1,10 @@
-package application;
+package service;
 
-import model.*;
-import model.builders.BetBuilder;
-import model.builders.DataBuilder;
-import model.builders.OutcomeBuilder;
-import model.builders.OutcomeOddBuilder;
+import domain.*;
+import domain.builders.BetBuilder;
+import domain.builders.DataBuilder;
+import domain.builders.OutcomeBuilder;
+import domain.builders.OutcomeOddBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -121,18 +121,18 @@ public class SportsBettingService {
         List<OutcomeOdd> winnerOutcomeOdds = new ArrayList<>();
 
         //kiválasztja a nyerő kimeneteleket
-        for (Bet b : this.builder.getEvents().get(0).getBets()){
-            for (Outcome o : b.getOutcomes()){
-                if(rand.nextInt(1) == 0){
-                    winnerOutcomeOdds.add(o.getOutcomeOdds().get(rand.nextInt(o.getOutcomeOdds().size())));
-                    winnerOutcomes.add(o);
-                    break;
+        for (SportEvent se : this.builder.getEvents()){
+            for (Bet b : se.getBets()){
+                for (Outcome o : b.getOutcomes()){
+                    if(rand.nextInt(1) == 0){
+                        winnerOutcomeOdds.add(o.getOutcomeOdds().get(rand.nextInt(o.getOutcomeOdds().size())));
+                        winnerOutcomes.add(o);
+                        break;
+                    }
                 }
             }
+            se.setResult(new Result(winnerOutcomes));
         }
-
-        //ezt lehetne használni az alábbi ciklusban
-        this.builder.getEvents().get(0).setResult(new Result(winnerOutcomes));
 
         //kiválasztja a nyerő oddsokat a kimeneteleken belül
         for (OutcomeOdd o : winnerOutcomeOdds){
