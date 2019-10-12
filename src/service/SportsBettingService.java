@@ -33,10 +33,15 @@ public class SportsBettingService {
         return builder.getPlayer();
     }
 
-    public List<SportEvent> findAllSportEvents(){
+    public List<SportEvent> findAllSportEvents() {
 
         LocalDateTime matchStartDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 18, 55, 00);
         LocalDateTime matchEndDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 40, 00);
+
+        //test for invalid interval
+        //LocalDateTime test = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 39, 00);
+        //LocalDateTime test2 = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 50, 00);
+        //OutcomeOdd testoo = new OutcomeOddBuilder().setValue(new BigDecimal(1.7)).setValidFrom(test).setValidUntil(test2).getOutcomeOdd();
 
         BetBuilder bb = new BetBuilder();
         BetBuilder bb2 = new BetBuilder();
@@ -65,37 +70,43 @@ public class SportsBettingService {
                 .setValidFrom(matchStartDate)
                 .setValidUntil(matchEndDate)
                 .getOutcomeOdd();
+        try {
 
-        Outcome oc = ocb.setDescription("Borussia Dortmund")
-                .addOutcomeOdd(oo)
-                .getOutcome();
-        Outcome oc2 = ocb2.setDescription("Salvia Praha")
-                .addOutcomeOdd(oo2)
-                .getOutcome();
-        Outcome oc3 = ocb3.setDescription("3 goals")
-                .addOutcomeOdd(oo3)
-                .getOutcome();
-        Outcome oc4 = ocb4.setDescription("4 goals")
-                .addOutcomeOdd(oo4)
-                .getOutcome();
+            Outcome oc = ocb.setDescription("Borussia Dortmund")
+                    .addOutcomeOdd(oo)
+                    //.addOutcomeOdd(testoo) test for invalid interval
+                    .getOutcome();
+            Outcome oc2 = ocb2.setDescription("Salvia Praha")
+                    .addOutcomeOdd(oo2)
+                    .getOutcome();
+            Outcome oc3 = ocb3.setDescription("3 goals")
+                    .addOutcomeOdd(oo3)
+                    .getOutcome();
+            Outcome oc4 = ocb4.setDescription("4 goals")
+                    .addOutcomeOdd(oo4)
+                    .getOutcome();
 
-        Bet bet1 = bb.setDescription("winner")
-                .setType(BetType.WINNER)
-                .addOutcome(oc)
-                .addOutcome(oc2)
-                .getBet();
+            Bet bet1 = bb.setDescription("winner")
+                    .setType(BetType.WINNER)
+                    .addOutcome(oc)
+                    .addOutcome(oc2)
+                    .getBet();
 
-        Bet bet2 = bb2.setDescription("number of goals")
-                .setType(BetType.GOALS)
-                .addOutcome(oc3)
-                .addOutcome(oc4)
-                .getBet();
+            Bet bet2 = bb2.setDescription("number of goals")
+                    .setType(BetType.GOALS)
+                    .addOutcome(oc3)
+                    .addOutcome(oc4)
+                    .getBet();
 
-        FootballSportEvent fse = new FootballSportEvent("Salvia Praha vs Borussia Dortmund", matchStartDate, matchEndDate);
-        fse.addBet(bet1);
-        fse.addBet(bet2);
+            FootballSportEvent fse = new FootballSportEvent("Salvia Praha vs Borussia Dortmund", matchStartDate, matchEndDate);
+            fse.addBet(bet1);
+            fse.addBet(bet2);
 
-        this.builder.addEvent(fse);
+            this.builder.addEvent(fse);
+        }
+        catch (OutcomeOddException e){
+            System.out.println(e.getMessage());
+        }
         return builder.getEvents();
     }
 

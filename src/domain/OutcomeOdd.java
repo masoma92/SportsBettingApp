@@ -35,6 +35,14 @@ public class OutcomeOdd {
         return value;
     }
 
+    public LocalDateTime getValidUntil() {
+        return validUntil;
+    }
+
+    public LocalDateTime getValidFrom() {
+        return validFrom;
+    }
+
     @Override
     public String toString() {
         return "Actual odd: " + value + ", Valid between: " + validFrom.toString() + ", Valid until: " + validUntil.toString() + "\n";

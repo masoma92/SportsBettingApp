@@ -3,6 +3,7 @@ package domain.builders;
 import domain.Bet;
 import domain.Outcome;
 import domain.OutcomeOdd;
+import domain.OutcomeOddException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class OutcomeBuilder {
         return this;
     }
 
-    public Outcome getOutcome(){
+    public Outcome getOutcome() throws OutcomeOddException {
         return new Outcome(this);
     }
 
