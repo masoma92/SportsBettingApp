@@ -34,7 +34,7 @@ public class SportsBettingService {
     }
 
     public List<SportEvent> findAllSportEvents() {
-
+        try {
         LocalDateTime matchStartDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 18, 55, 00);
         LocalDateTime matchEndDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 40, 00);
 
@@ -70,7 +70,7 @@ public class SportsBettingService {
                 .setValidFrom(matchStartDate)
                 .setValidUntil(matchEndDate)
                 .getOutcomeOdd();
-        try {
+
 
             Outcome oc = ocb.setDescription("Borussia Dortmund")
                     .addOutcomeOdd(oo)
