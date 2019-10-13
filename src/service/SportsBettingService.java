@@ -1,10 +1,7 @@
 package service;
 
 import domain.*;
-import domain.builders.BetBuilder;
-import domain.builders.DataBuilder;
-import domain.builders.OutcomeBuilder;
-import domain.builders.OutcomeOddBuilder;
+import domain.builders.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -98,7 +95,12 @@ public class SportsBettingService {
                     .addOutcome(oc4)
                     .getBet();
 
-            FootballSportEvent fse = new FootballSportEvent("Salvia Praha vs Borussia Dortmund", matchStartDate, matchEndDate);
+            SportEvent fse = new SportEventBuilder()
+                    .setTitle("Salvia Praha vs Borussia Dortmund")
+                    .setStartDate(matchStartDate)
+                    .setEndDate(matchEndDate)
+                    .getSportEvent("FootballSportEvent");
+
             fse.addBet(bet1);
             fse.addBet(bet2);
 

@@ -1,5 +1,7 @@
 package domain;
 
+import domain.builders.SportEventBuilder;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,16 @@ public abstract class SportEvent {
         this.startDate = startDate; //sport event start date
         this.endDate = endDate; //sport event end date
         this.bets = new ArrayList<>(); //list of the different type of bets
+        for(Bet b : bets){
+            b.setEvent(this);
+        }
+    }
+
+    public SportEvent(SportEventBuilder builder) {
+        this.title = builder.getTitle(); //sport event name
+        this.startDate = builder.getStartDate(); //sport event start date
+        this.endDate = builder.getEndDate(); //sport event end date
+        this.bets = builder.getBets(); //list of the different type of bets
         for(Bet b : bets){
             b.setEvent(this);
         }
