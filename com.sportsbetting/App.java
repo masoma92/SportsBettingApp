@@ -33,10 +33,6 @@ public class App {
         while (service.getBuilder().getPlayer().getBalance().compareTo(BigDecimal.ZERO) > 0){
             view.printOutcomeOdds(events);
             OutcomeOdd oc = view.selectOutcomeOdd(events);
-            if (oc == null){
-                System.out.println("Not valid outcome!");
-                break;
-            }
             BigDecimal amount = view.readWagerAmount();
             if (service.getBuilder().getPlayer().getBalance().compareTo(amount) >= 0){
                 Wager wager = new WagerBuilder()

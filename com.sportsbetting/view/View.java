@@ -19,30 +19,38 @@ public class View implements IView {
 
     public Player readPlayerData(){
         PlayerBuilder builder = new PlayerBuilder();
-        System.out.println("What is your name?");
+        try {
 
-        String name = in.nextLine();
-        /*if (name.trim().equals("")){
-            System.out.println("Not valid name!");
-            readPlayerData();
-        }*/
-        builder.setName(name);
+            System.out.println("What is your name?");
 
-        System.out.println("How much money do you have (more than 0)?");
+            String name = in.nextLine();
+            if (name.trim().equals("")) {
+                throw new Exception("Not valid name!");
+            }
+            else{
+                builder.setName(name);
+            }
 
-        String balance = in.nextLine();
+            System.out.println("How much money do you have (more than 0)?");
 
-        /*if (balance.trim().equals("") || new BigDecimal(balance).compareTo(BigDecimal.ZERO) <= 0){
-            System.out.println("Not valid amount!\n");
-            readPlayerData();
-        }*/
+            String balance = in.nextLine();
 
-        builder.setBalance(new BigDecimal(balance));
+            if (balance.trim().equals("") || new BigDecimal(balance).compareTo(BigDecimal.ZERO) <= 0){
+                throw new Exception("Not valid amount!");
+            }
+            else{
+                builder.setBalance(new BigDecimal(balance));
+            }
 
-        System.out.println("What is your currency? (HUF, EUR or USD)");
-        builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
+            System.out.println("What is your currency? (HUF, EUR or USD)");
+            builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
 
-        return builder.getPlayer();
+            return builder.getPlayer();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return readPlayerData();
+        }
     }
 
     public void printWelcomeMessage(Player player){
@@ -81,21 +89,22 @@ public class View implements IView {
                 }
             }
         }
-        return null;
+        System.out.println("Not valid outcome!\nTry again!\n");
+        return selectOutcomeOdd(events);
     }
 
     public BigDecimal readWagerAmount(){
         System.out.println("What amount do you wish to bet on it?");
 
-        //megjegyzi az értéket akkor is ha rossz javítani!!!!
         BigDecimal amount = new BigDecimal(in.nextLine());
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0){
             System.out.println("Not valid betting amount!\n");
-            readWagerAmount();
+            return readWagerAmount();
         }
-
-        return amount;
+        else{
+            return amount;
+        }
     }
 
     public void printWagerSaved(Wager wager){
