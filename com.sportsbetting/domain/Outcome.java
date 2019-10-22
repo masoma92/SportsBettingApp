@@ -16,12 +16,8 @@ public class Outcome {
         this.bet = bet;
         this.outcomeOdds = outcomeOdds;
 
-        // checking if outcomeodds are in the same interval
-        for (int i = 0; i < outcomeOdds.size(); i++){
-            if (i < outcomeOdds.size()-1 && outcomeOdds.get(i).getValidUntil().isAfter(outcomeOdds.get(i+1).getValidFrom())){
-                throw new OutcomeOddException(outcomeOdds.get(i), outcomeOdds.get(i+1));
-            }
-            outcomeOdds.get(i).setOutcome(this);
+        for (OutcomeOdd k : outcomeOdds){
+            k.setOutcome(this);
         }
     }
 
@@ -30,12 +26,8 @@ public class Outcome {
         this.bet = builder.getBet();
         this.outcomeOdds = builder.getOutcomeOdds();
 
-        // checking if outcomeodds are in the same interval
-        for (int i = 0; i < outcomeOdds.size(); i++){
-            if (i < outcomeOdds.size()-1 && outcomeOdds.get(i).getValidUntil().isAfter(outcomeOdds.get(i+1).getValidFrom())){
-                throw new OutcomeOddException(outcomeOdds.get(i), outcomeOdds.get(i+1));
-            }
-            outcomeOdds.get(i).setOutcome(this);
+        for (OutcomeOdd k : outcomeOdds){
+            k.setOutcome(this);
         }
     }
 

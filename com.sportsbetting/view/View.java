@@ -3,11 +3,13 @@ package view;
 import domain.*;
 import domain.builders.PlayerBuilder;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
-public class View {
+public class View implements IView {
 
     private Scanner in;
 
@@ -15,35 +17,31 @@ public class View {
         in = new Scanner(System.in);
     }
 
-    void currencyChooser(PlayerBuilder builder, Scanner in){
-        System.out.println("What is your currency? (HUF, EUR or USD)");
-        String s = in.nextLine();
-        switch(s){
-            case "EUR":
-                builder.setCurrency(Currency.EUR);
-                break;
-            case "HUF":
-                builder.setCurrency(Currency.HUF);
-                break;
-            case "USD":
-                builder.setCurrency(Currency.USD);
-                break;
-            default:
-                System.out.println();
-                currencyChooser(builder, in);
-        }
-    }
-
     public Player readPlayerData(){
         PlayerBuilder builder = new PlayerBuilder();
         System.out.println("What is your name?");
 
-        builder.setName(in.nextLine());
+        String name = in.nextLine();
+        /*if (name.trim().equals("")){
+            System.out.println("Not valid name!");
+            readPlayerData();
+        }*/
+        builder.setName(name);
 
         System.out.println("How much money do you have (more than 0)?");
-        builder.setBalance(new BigDecimal(in.nextLine()));
 
-        currencyChooser(builder, in);
+        String balance = in.nextLine();
+
+        /*if (balance.trim().equals("") || new BigDecimal(balance).compareTo(BigDecimal.ZERO) <= 0){
+            System.out.println("Not valid amount!\n");
+            readPlayerData();
+        }*/
+
+        builder.setBalance(new BigDecimal(balance));
+
+        System.out.println("What is your currency? (HUF, EUR or USD)");
+        builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
+
         return builder.getPlayer();
     }
 
@@ -86,9 +84,18 @@ public class View {
         return null;
     }
 
-    public BigDecimal readWagerAmout(){
+    public BigDecimal readWagerAmount(){
         System.out.println("What amount do you wish to bet on it?");
-        return new BigDecimal(in.nextLine());
+
+        //megjegyzi az értéket akkor is ha rossz javítani!!!!
+        BigDecimal amount = new BigDecimal(in.nextLine());
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0){
+            System.out.println("Not valid betting amount!\n");
+            readWagerAmount();
+        }
+
+        return amount;
     }
 
     public void printWagerSaved(Wager wager){
