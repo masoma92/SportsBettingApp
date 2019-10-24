@@ -3,7 +3,6 @@ package domain;
 
 import domain.builders.OutcomeBuilder;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Outcome {

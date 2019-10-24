@@ -3,8 +3,6 @@ package view;
 import domain.*;
 import domain.builders.PlayerBuilder;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
