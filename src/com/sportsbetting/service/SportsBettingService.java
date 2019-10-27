@@ -47,15 +47,14 @@ public class SportsBettingService implements ISportBettingService {
         List<Wager> wagers = this.builder.getWagers();
 
         List<Outcome> winnerOutcomes = new ArrayList<>();
-        List<OutcomeOdd> winnerOutcomeOdds = new ArrayList<>();
 
         //kiválasztja a nyerő kimeneteleket
-        chooseWinningOutcomes(winnerOutcomes, winnerOutcomeOdds);
+        chooseWinningOutcomes(winnerOutcomes);
 
         //kiválasztja a nyerő oddsokat a kimeneteleken belül
-        for (OutcomeOdd o : winnerOutcomeOdds){
+        for (Outcome o : winnerOutcomes){
             for (Wager w : wagers){
-                if (w.getOdd() == o){
+                if (o.getOutcomeOdds().contains(w.getOdd())){
                     w.setWin(true);
                     BigDecimal newBalance = w.getPlayer().getBalance().add(w.getOdd().getValue().multiply(w.getAmount()));
                     w.getPlayer().setBalance(newBalance);
@@ -64,12 +63,11 @@ public class SportsBettingService implements ISportBettingService {
         }
     }
 
-    void chooseWinningOutcomes(List<Outcome> winnerOutcomes, List<OutcomeOdd> winnerOutcomeOdds){
+    void chooseWinningOutcomes(List<Outcome> winnerOutcomes){
         for (SportEvent se : this.builder.getEvents()){
             for (Bet b : se.getBets()){
                 for (Outcome o : b.getOutcomes()){
                     if(new Random().nextBoolean()){
-                        winnerOutcomeOdds.add(o.getOutcomeOdds().get(new Random().nextInt(o.getOutcomeOdds().size())));
                         winnerOutcomes.add(o);
                         break;
                     }
