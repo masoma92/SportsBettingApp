@@ -5,23 +5,18 @@ import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
 import com.example.sportsbetting.domain.builders.DataBuilder;
 import com.example.sportsbetting.domain.builders.PlayerBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
-import javax.inject.Inject;
 import java.util.Locale;
 import java.util.Scanner;
 
 @Configuration
 @Import({MessageSourceConfig.class})
-@PropertySource(value = { "classpath:config.properties" }, encoding = "utf-8")
+@PropertySource(value = { "classpath:config.properties" }, encoding = "UTF-8")
 public class AppConfig {
 
     @Value("${default.language}")
