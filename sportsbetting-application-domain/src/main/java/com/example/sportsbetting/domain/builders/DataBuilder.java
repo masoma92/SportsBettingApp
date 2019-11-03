@@ -17,7 +17,6 @@ public class DataBuilder {
     public DataBuilder() {
         events = new ArrayList<>();
         wagers = new ArrayList<>();
-        this.buildingDatas();
     }
 
     void dateValidation(List<OutcomeOdd> outcomeOdds) throws OutcomeOddException{

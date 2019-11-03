@@ -2,47 +2,58 @@ package com.example.sportsbetting.app.view;
 
 import com.example.sportsbetting.domain.*;
 import com.example.sportsbetting.domain.builders.PlayerBuilder;
+import javafx.application.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class View implements IView {
 
-    private Scanner in;
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public View() {
-        in = new Scanner(System.in);
+    @Autowired
+    private Scanner in;
+    @Autowired
+    private PlayerBuilder builder;
+    @Autowired
+    private MessageSource messageSource;
+    private Locale locale;
+
+    public View(Locale locale) {
+        this.locale = locale;
     }
 
-    public Player readPlayerData(){
-        PlayerBuilder builder = new PlayerBuilder();
-        try {
 
-            System.out.println("What is your name?");
+    public Player readPlayerData(){
+        try {
+            logger.info(messageSource.getMessage("question_name", null, "defaultN", locale));
 
             String name = in.nextLine();
             if (name.trim().equals("")) {
-                throw new Exception("Not valid name!");
+                throw new Exception(messageSource.getMessage("notvalid_name", null, "defaultNVN", locale));
             }
             else{
                 builder.setName(name);
             }
 
-            System.out.println("How much money do you have (more than 0)?");
+            logger.info(messageSource.getMessage("question_money", null, "defaultQM", locale));
 
             String balance = in.nextLine();
 
             if (balance.trim().equals("") || new BigDecimal(balance).compareTo(BigDecimal.ZERO) <= 0){
-                throw new Exception("Not valid amount!");
+                throw new Exception(messageSource.getMessage("notvalid_amount", null, "defaultNVA", locale));
             }
             else{
                 builder.setBalance(new BigDecimal(balance));
             }
 
-            System.out.println("What is your currency? (HUF, EUR or USD)");
+            logger.info(messageSource.getMessage("question_currency", null, "defaultQC", locale));
             builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
 
             return builder.getPlayer();
@@ -54,15 +65,15 @@ public class View implements IView {
     }
 
     public void printWelcomeMessage(Player player){
-        System.out.println(String.format("Hello " + player.getName() + "!"));
+        logger.info(messageSource.getMessage("greetings_name", new Object[] {builder.getName()}, "defwelcome", locale));
     }
 
     public void printBalance(Player player){
-        System.out.println(String.format("Your balance is " + player.getBalance() + " " + player.getCurrency()));
+        logger.info(messageSource.getMessage("balance", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defB", locale));
     }
 
     public void printOutcomeOdds(List<SportEvent> events){
-        System.out.println("What are you want to bet on? (choose a number or press q for quit)");
+        logger.info(messageSource.getMessage("question_eventnum", null, "defQE", locale));
         for(SportEvent se : events){
             System.out.println(se);
         }
@@ -89,17 +100,17 @@ public class View implements IView {
                 }
             }
         }
-        System.out.println("Not valid outcome!\nTry again!\n");
+        logger.info(messageSource.getMessage("notvalid_outcome", null, "defNO", locale));
         return selectOutcomeOdd(events);
     }
 
     public BigDecimal readWagerAmount(){
-        System.out.println("What amount do you wish to bet on it?");
+        logger.info(messageSource.getMessage("question_betamount", null, "defQBA", locale));
 
         BigDecimal amount = new BigDecimal(in.nextLine());
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0){
-            System.out.println("Not valid betting amount!\n");
+            logger.info(messageSource.getMessage("notvalid_bettingamout",null, "defNVBA", locale));
             return readWagerAmount();
         }
         else{
@@ -108,21 +119,27 @@ public class View implements IView {
     }
 
     public void printWagerSaved(Wager wager){
-        String ending = wager.isProcessed() ? "" : " saved";
+        String ending = wager.isProcessed() ? "" : messageSource.getMessage("wager_issaved", null, "defWIS", locale);
         if (ending.equals("")){
-            ending = wager.isWin() ? "win: true" : "win: false";
+            ending = wager.isWin() ? messageSource.getMessage("wager_win", null, "defWW", locale) :
+                    messageSource.getMessage("wager_lose", null, "defWL", locale);
         }
-        System.out.println("Wager: " + wager.getOdd().getOutcome().getBet().getType() + " = " + wager.getOdd().getOutcome().getDescription()
-                + ", Event: " + wager.getOdd().getOutcome().getBet().getEvent().getTitle() + " [odd: " + wager.getOdd().getValue() + ", amount: " +
-                wager.getAmount()+"]" + ending);
+        logger.info(messageSource.getMessage("wager", new Object[]{
+                wager.getOdd().getOutcome().getBet().getType(),
+                wager.getOdd().getOutcome().getDescription(),
+                wager.getOdd().getOutcome().getBet().getEvent().getTitle(),
+                wager.getOdd().getValue(),
+                wager.getAmount(),
+                ending
+        }, "defW", locale));
     }
 
     public void printNotEnoughBalance(Player player){
-        System.out.println("You don't have enough money, your balance is " + player.getBalance() + " " + player.getCurrency());
+        logger.info(messageSource.getMessage("no_money", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defNM", locale));
     }
 
     public void printResults(Player player, List<Wager> wagers){
-        System.out.println("Results: ");
+        logger.info(messageSource.getMessage("results", null, "defR", locale));
         for(Wager w : wagers){
             printWagerSaved(w);
         }

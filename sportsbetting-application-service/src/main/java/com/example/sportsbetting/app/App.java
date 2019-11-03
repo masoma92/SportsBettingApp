@@ -6,6 +6,8 @@ import com.example.sportsbetting.domain.builders.WagerBuilder;
 import com.example.sportsbetting.domain.OutcomeOdd;
 import com.example.sportsbetting.domain.SportEvent;
 import com.example.sportsbetting.domain.Wager;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,9 +21,11 @@ public class App {
         this.view = view;
     }
 
-    public static void main(String[] args){
-        App app = new App(new SportsBettingService(), new View());
-        app.play();
+    public void play(){
+        createPlayer();
+        doBetting();
+        calculateResults();
+        printResults();
     }
 
     private void createPlayer(){
@@ -61,10 +65,5 @@ public class App {
         view.printResults(this.service.getBuilder().getPlayer(), this.service.getBuilder().getWagers());
     }
 
-    private void play(){
-        createPlayer();
-        doBetting();
-        calculateResults();
-        printResults();
-    }
+
 }

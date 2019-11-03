@@ -22,7 +22,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.sportsbetting.app.App</mainClass>
+                            <mainClass>com.example.sportsbetting.app.AppSpring</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
