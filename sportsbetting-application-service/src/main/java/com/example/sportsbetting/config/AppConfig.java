@@ -51,5 +51,4 @@ public class AppConfig {
     public PlayerBuilder playerBuilder(){
         return new PlayerBuilder();
     }
-
 }

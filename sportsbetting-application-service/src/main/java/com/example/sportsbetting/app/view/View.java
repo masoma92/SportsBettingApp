@@ -26,13 +26,14 @@ public class View implements IView {
     private Locale locale;
 
     public View(Locale locale) {
+        logger.info("View bean created!");
         this.locale = locale;
     }
 
 
     public Player readPlayerData(){
         try {
-            logger.info(messageSource.getMessage("question_name", null, "defaultN", locale));
+            System.out.println(messageSource.getMessage("question_name", null, "defaultN", locale));
 
             String name = in.nextLine();
             if (name.trim().equals("")) {
@@ -42,7 +43,7 @@ public class View implements IView {
                 builder.setName(name);
             }
 
-            logger.info(messageSource.getMessage("question_money", null, "defaultQM", locale));
+            System.out.println(messageSource.getMessage("question_money", null, "defaultQM", locale));
 
             String balance = in.nextLine();
 
@@ -53,7 +54,7 @@ public class View implements IView {
                 builder.setBalance(new BigDecimal(balance));
             }
 
-            logger.info(messageSource.getMessage("question_currency", null, "defaultQC", locale));
+            System.out.println(messageSource.getMessage("question_currency", null, "defaultQC", locale));
             builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
 
             return builder.getPlayer();
@@ -65,15 +66,15 @@ public class View implements IView {
     }
 
     public void printWelcomeMessage(Player player){
-        logger.info(messageSource.getMessage("greetings_name", new Object[] {builder.getName()}, "defwelcome", locale));
+        System.out.println(messageSource.getMessage("greetings_name", new Object[] {builder.getName()}, "defwelcome", locale));
     }
 
     public void printBalance(Player player){
-        logger.info(messageSource.getMessage("balance", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defB", locale));
+        System.out.println(messageSource.getMessage("balance", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defB", locale));
     }
 
     public void printOutcomeOdds(List<SportEvent> events){
-        logger.info(messageSource.getMessage("question_eventnum", null, "defQE", locale));
+        System.out.println(messageSource.getMessage("question_eventnum", null, "defQE", locale));
         for(SportEvent se : events){
             System.out.println(se);
         }
@@ -100,17 +101,17 @@ public class View implements IView {
                 }
             }
         }
-        logger.info(messageSource.getMessage("notvalid_outcome", null, "defNO", locale));
+        System.out.println(messageSource.getMessage("notvalid_outcome", null, "defNO", locale));
         return selectOutcomeOdd(events);
     }
 
     public BigDecimal readWagerAmount(){
-        logger.info(messageSource.getMessage("question_betamount", null, "defQBA", locale));
+        System.out.println(messageSource.getMessage("question_betamount", null, "defQBA", locale));
 
         BigDecimal amount = new BigDecimal(in.nextLine());
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0){
-            logger.info(messageSource.getMessage("notvalid_bettingamout",null, "defNVBA", locale));
+            System.out.println(messageSource.getMessage("notvalid_bettingamout",null, "defNVBA", locale));
             return readWagerAmount();
         }
         else{
@@ -124,7 +125,7 @@ public class View implements IView {
             ending = wager.isWin() ? messageSource.getMessage("wager_win", null, "defWW", locale) :
                     messageSource.getMessage("wager_lose", null, "defWL", locale);
         }
-        logger.info(messageSource.getMessage("wager", new Object[]{
+        System.out.println(messageSource.getMessage("wager", new Object[]{
                 wager.getOdd().getOutcome().getBet().getType(),
                 wager.getOdd().getOutcome().getDescription(),
                 wager.getOdd().getOutcome().getBet().getEvent().getTitle(),
@@ -135,11 +136,11 @@ public class View implements IView {
     }
 
     public void printNotEnoughBalance(Player player){
-        logger.info(messageSource.getMessage("no_money", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defNM", locale));
+        System.out.println(messageSource.getMessage("no_money", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defNM", locale));
     }
 
     public void printResults(Player player, List<Wager> wagers){
-        logger.info(messageSource.getMessage("results", null, "defR", locale));
+        System.out.println(messageSource.getMessage("results", null, "defR", locale));
         for(Wager w : wagers){
             printWagerSaved(w);
         }
