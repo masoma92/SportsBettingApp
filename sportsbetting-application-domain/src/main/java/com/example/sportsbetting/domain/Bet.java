@@ -2,13 +2,27 @@ package com.example.sportsbetting.domain;
 
 import com.example.sportsbetting.domain.builders.BetBuilder;
 
+import javax.persistence.*;
 import java.util.List;
 
-
+@Entity
 public class Bet {
-    private String description; //eg.:number of goals
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    final private String description; //eg.:number of goals
+
+    @Enumerated(EnumType.STRING)
     private BetType type;
+
+    //mapped in SportEvent
+    @ManyToOne
+    @JoinColumn(name = "event_id")
     private SportEvent event;
+
+    @OneToMany(mappedBy = "bet")
     private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
 
     public Bet(String description, BetType type, List<Outcome> outcomes) {
@@ -52,6 +66,14 @@ public class Bet {
 
     public void setEvent(SportEvent event) {
         this.event = event;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 public class PlayerBuilder {
     private String name;
+    private int accountNumber;
     private LocalDate birth;
     private Currency currency;
     private BigDecimal balance;
@@ -69,6 +70,15 @@ public class PlayerBuilder {
     public PlayerBuilder setBalance(BigDecimal balance){
         this.balance = balance;
         return this;
+    }
+
+    public PlayerBuilder setAccountNumber(int accountNumber){
+        this.accountNumber = accountNumber;
+        return this;
+    }
+
+    public int getAccountNumber(){
+        return this.accountNumber;
     }
 
     public Player getPlayer(){

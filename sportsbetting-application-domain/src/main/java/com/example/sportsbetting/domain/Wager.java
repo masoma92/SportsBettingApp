@@ -2,16 +2,34 @@ package com.example.sportsbetting.domain;
 
 import com.example.sportsbetting.domain.builders.WagerBuilder;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
 public class Wager {
-    private BigDecimal amount;
-    private LocalDateTime timestampCreated; //when the wager created
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    final private BigDecimal amount;
+
+    @Column(name = "timestamp_created")
+    final private LocalDateTime timestampCreated; //when the wager created
+
     private boolean processed; //true if it has paid
+
     private boolean win; //true if player has won
+
+    @OneToOne
+    @JoinColumn(name = "player_id")
     private Player player;
+
+    @OneToOne
+    @JoinColumn(name = "odd_id")
     private OutcomeOdd odd;
+
+    @Enumerated(EnumType.STRING)
     private Currency currency;
 
     public Wager(BigDecimal amount, Player player, OutcomeOdd odd, Currency currency) {
@@ -68,5 +86,13 @@ public class Wager {
 
     public Currency getCurrency() {
         return currency;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

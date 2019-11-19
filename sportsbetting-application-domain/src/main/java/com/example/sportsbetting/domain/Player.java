@@ -2,26 +2,32 @@ package com.example.sportsbetting.domain;
 
 import com.example.sportsbetting.domain.builders.PlayerBuilder;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Player extends User{
-    static public int accNum = 0;
-    static public int getAccountNumber(){
-        return accNum++;
-    }
 
-    private String name;
-    private Integer accountNumber;
+    @Column(name = "account_number")
+    private int accountNumber;
+
+    final private String name;
+
     private BigDecimal balance;
-    private LocalDate birth;
+
+    final private LocalDate birth;
+
+    @Enumerated(EnumType.STRING)
     private Currency currency;
 
     public Player(String email, String password, String name, LocalDate birth, Currency currency) {
         super(email, password);
         this.name = name;
         this.balance = BigDecimal.valueOf(0.0);
-        this.accountNumber = this.getAccountNumber();
         this.birth = birth;
         this.currency = currency;
     }
@@ -29,10 +35,10 @@ public class Player extends User{
     public Player(PlayerBuilder builder){
         super(builder.getEmail(), builder.getPassword());
         this.name = builder.getName();
-        this.accountNumber = this.getAccountNumber();
         this.balance = builder.getBalance();
         this.birth = builder.getBirth();
         this.currency = builder.getCurrency();
+        this.accountNumber = builder.getAccountNumber();
     }
 
     public String getName() {

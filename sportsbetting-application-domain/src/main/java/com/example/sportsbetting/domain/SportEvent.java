@@ -2,16 +2,33 @@ package com.example.sportsbetting.domain;
 
 import com.example.sportsbetting.domain.builders.SportEventBuilder;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //all children goes in one entity
+@DiscriminatorColumn(name = "sportevent_type") //children type
 public abstract class SportEvent {
 
-    private String title;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    final private String title;
+
+    @Column(name = "start_date")
+    final private LocalDateTime startDate;
+
+    @Column(name = "end_date")
+    final private LocalDateTime endDate;
+
+    @OneToOne
+    @JoinColumn(name = "result_id")
     private Result result;
+
+    @OneToMany(mappedBy = "event")
     private List<Bet> bets;
 
     public SportEvent(String title, LocalDateTime startDate, LocalDateTime endDate) {
@@ -56,6 +73,14 @@ public abstract class SportEvent {
 
     public Result getResult() {
         return result;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void addBet(Bet bet){

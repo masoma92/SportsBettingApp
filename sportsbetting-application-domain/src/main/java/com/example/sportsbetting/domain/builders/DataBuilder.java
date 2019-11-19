@@ -28,7 +28,7 @@ public class DataBuilder {
         }
     }
 
-    public void buildingDatas(){
+    public void buildingData(){
         try {
             LocalDateTime matchStartDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 18, 55, 00);
             LocalDateTime matchEndDate = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 40, 00);

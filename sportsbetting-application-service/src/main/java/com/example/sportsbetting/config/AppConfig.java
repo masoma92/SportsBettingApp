@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -37,7 +38,7 @@ public class AppConfig {
         return new View(locale);
     }
 
-    @Bean(initMethod = "buildingDatas")
+    @Bean(initMethod = "buildingData") //after creating bean it runs buildingData method
     public DataBuilder dataBuilder(){
         return new DataBuilder();
     }

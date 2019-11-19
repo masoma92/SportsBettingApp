@@ -1,9 +1,16 @@
 package com.example.sportsbetting.domain;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public final class Result {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @OneToMany
     List<Outcome> winnerOutcomes; //1 event all outcomes
 
     public Result(List<Outcome> winnerOutcomes){
@@ -12,5 +19,13 @@ public final class Result {
 
     public List<Outcome> getWinnerOutcomes() {
         return winnerOutcomes;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

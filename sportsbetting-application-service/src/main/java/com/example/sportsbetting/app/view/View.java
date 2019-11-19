@@ -130,7 +130,7 @@ public class View implements IView {
                 wager.getOdd().getOutcome().getDescription(),
                 wager.getOdd().getOutcome().getBet().getEvent().getTitle(),
                 wager.getOdd().getValue(),
-                wager.getAmount(),
+                wager.getAmount().toString(),
                 ending
         }, "defW", locale));
     }
