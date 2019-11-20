@@ -1,8 +1,7 @@
 package com.example.sportsbetting.domain;
 
-import com.example.sportsbetting.domain.builders.BetBuilder;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,28 +23,14 @@ public class Bet {
 
     @OneToMany(mappedBy = "bet")
     private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
-
-    public Bet(String description, BetType type, List<Outcome> outcomes) {
-        this.description = description;
-        this.type = type;
-        this.outcomes = outcomes;
-        for (Outcome k : outcomes){
-            k.setBet(this);
-        }
-    }
-
+    
     public Bet(BetBuilder builder) {
-        this.description = builder.getDescription();
-        this.type = builder.getType();
-        this.event = builder.getEvent();
-        this.outcomes = builder.getOutcomes();
+        this.description = builder.description;
+        this.type = builder.type;
+        this.outcomes = builder.outcomes;
         for (Outcome k : outcomes){
             k.setBet(this);
         }
-    }
-
-    public SportEvent getEvent() {
-        return event;
     }
 
     public String getDescription() {
@@ -56,8 +41,8 @@ public class Bet {
         return type;
     }
 
-    public void addOutCome(Outcome outcome){
-        this.outcomes.add(outcome);
+    public SportEvent getEvent() {
+        return event;
     }
 
     public List<Outcome> getOutcomes() {
@@ -68,16 +53,38 @@ public class Bet {
         this.event = event;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Bet: " + this.description;
+    }
+
+    public static class BetBuilder {
+
+        private String description; //eg.:number of goals
+        private BetType type;
+        private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
+
+        public BetBuilder() {
+            this.outcomes = new ArrayList<>();
+        }
+
+        public BetBuilder setDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public BetBuilder setType(BetType type){
+            this.type = type;
+            return this;
+        }
+
+        public BetBuilder addOutcome(Outcome outcome){
+            this.outcomes.add(outcome);
+            return this;
+        }
+
+        public Bet getBet(){
+            return new Bet(this);
+        }
     }
 }

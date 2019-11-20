@@ -1,7 +1,6 @@
 package com.example.sportsbetting.app.view;
 
 import com.example.sportsbetting.domain.*;
-import com.example.sportsbetting.domain.builders.PlayerBuilder;
 import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -16,11 +18,12 @@ import java.util.Scanner;
 public class View implements IView {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static int accountNumber = 11110;
 
     @Autowired
     private Scanner in;
     @Autowired
-    private PlayerBuilder builder;
+    private Player.PlayerBuilder builder;
     @Autowired
     private MessageSource messageSource;
     private Locale locale;
@@ -56,6 +59,9 @@ public class View implements IView {
 
             System.out.println(messageSource.getMessage("question_currency", null, "defaultQC", locale));
             builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
+
+            builder.setAccountNumber(accountNumber++);
+            builder.setBirthDate(LocalDate.of(1912, 12, 12));
 
             return builder.getPlayer();
         }

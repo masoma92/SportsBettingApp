@@ -2,12 +2,9 @@ package com.example.sportsbetting.app;
 
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
-import com.example.sportsbetting.domain.builders.WagerBuilder;
 import com.example.sportsbetting.domain.OutcomeOdd;
 import com.example.sportsbetting.domain.SportEvent;
 import com.example.sportsbetting.domain.Wager;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -41,7 +38,7 @@ public class App {
             OutcomeOdd oc = view.selectOutcomeOdd(events);
             BigDecimal amount = view.readWagerAmount();
             if (service.getBuilder().getPlayer().getBalance().compareTo(amount) >= 0){
-                Wager wager = new WagerBuilder()
+                Wager wager = new Wager.WagerBuilder()
                         .setAmout(amount)
                         .setOutcomeOdd(oc)
                         .setPlayer(service.getBuilder().getPlayer())

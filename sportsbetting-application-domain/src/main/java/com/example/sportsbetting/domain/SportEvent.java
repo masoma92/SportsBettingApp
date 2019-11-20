@@ -1,7 +1,5 @@
 package com.example.sportsbetting.domain;
 
-import com.example.sportsbetting.domain.builders.SportEventBuilder;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,64 +29,32 @@ public abstract class SportEvent {
     @OneToMany(mappedBy = "event")
     private List<Bet> bets;
 
-    public SportEvent(String title, LocalDateTime startDate, LocalDateTime endDate) {
-        this.title = title; //sport event name
-        this.startDate = startDate; //sport event start date
-        this.endDate = endDate; //sport event end date
-        this.bets = new ArrayList<>(); //list of the different type of bets
-        for(Bet b : bets){
-            b.setEvent(this);
-        }
-    }
-
     public SportEvent(SportEventBuilder builder) {
-        this.title = builder.getTitle(); //sport event name
-        this.startDate = builder.getStartDate(); //sport event start date
-        this.endDate = builder.getEndDate(); //sport event end date
-        this.bets = builder.getBets(); //list of the different type of bets
+        this.title = builder.title; //sport event name
+        this.startDate = builder.startDate; //sport event start date
+        this.endDate = builder.endDate; //sport event end date
+        this.bets = builder.bets; //list of the different type of bets
         for(Bet b : bets){
             b.setEvent(this);
         }
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
     public List<Bet> getBets() {
         return bets;
     }
 
-    public Result getResult() {
-        return result;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
+    public void setResult(Result result) {
+        this.result = result;
     }
 
     public void addBet(Bet bet){
         bet.setEvent(this);
         this.bets.add(bet);
     }
-
-
 
     @Override
     public String toString() {
@@ -104,5 +70,43 @@ public abstract class SportEvent {
         }
 
         return output;
+    }
+
+    public static class SportEventBuilder{
+        private String title;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
+        private List<Bet> bets;
+
+        public SportEventBuilder() {
+            this.bets = new ArrayList<>();
+        }
+
+        public SportEventBuilder setTitle(String title){
+            this.title = title;
+            return this;
+        }
+
+        public SportEventBuilder setStartDate(LocalDateTime startDate){
+            this.startDate = startDate;
+            return this;
+        }
+
+        public SportEventBuilder setEndDate(LocalDateTime endDate){
+            this.endDate = endDate;
+            return this;
+        }
+
+        public SportEvent getSportEvent(String sportEventType){
+            switch (sportEventType)
+            {
+                case "FootballSportEvent":
+                    return new FootballSportEvent(this);
+                case "TennisSportEvent":
+                    return new TennisSportEvent(this);
+                default:
+                    return null;
+            }
+        }
     }
 }

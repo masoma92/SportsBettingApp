@@ -1,10 +1,7 @@
 package com.example.sportsbetting.domain;
 
-
-import com.example.sportsbetting.domain.builders.OutcomeBuilder;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,63 +13,62 @@ public class Outcome {
 
     final private String description; //eg.: 0 goal or 1 goal etc.
 
-    //mappolva van Betben
+    //mapped in Bet
     @ManyToOne
     private Bet bet;
 
     @OneToMany(mappedBy = "outcome")
     private List<OutcomeOdd> outcomeOdds;
 
-    public Outcome(String description, Bet bet, List<OutcomeOdd> outcomeOdds) throws OutcomeOddException {
-        this.description = description;
-        this.bet = bet;
-        this.outcomeOdds = outcomeOdds;
-
-        for (OutcomeOdd k : outcomeOdds){
-            k.setOutcome(this);
-        }
-    }
-
     public Outcome(OutcomeBuilder builder) throws OutcomeOddException {
-        this.description = builder.getDescription();
-        this.bet = builder.getBet();
-        this.outcomeOdds = builder.getOutcomeOdds();
-
+        this.description = builder.description;
+        this.outcomeOdds = builder.outcomeOdds;
         for (OutcomeOdd k : outcomeOdds){
             k.setOutcome(this);
         }
-    }
-
-    public void setBet(Bet bet) {
-        this.bet = bet;
-    }
-
-    public List<OutcomeOdd> getOutcomeOdds() {
-        return outcomeOdds;
-    }
-
-    public Bet getBet() {
-        return bet;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public int getId() {
-        return id;
+    public Bet getBet() {
+        return bet;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public List<OutcomeOdd> getOutcomeOdds() {
+        return outcomeOdds;
     }
 
-    public void addOutcomeOdds(OutcomeOdd outcomeOdd){
-        this.outcomeOdds.add(outcomeOdd);
+    public void setBet(Bet bet) {
+        this.bet = bet;
     }
 
     @Override
     public String toString() {
         return "Outcome: " + this.description + ", ";
+    }
+
+    public static class OutcomeBuilder {
+        private String description; //eg.: 0 goal or 1 goal etc.
+        private List<OutcomeOdd> outcomeOdds;
+
+        public OutcomeBuilder() {
+            this.outcomeOdds = new ArrayList<>();
+        }
+
+        public OutcomeBuilder setDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public OutcomeBuilder addOutcomeOdd(OutcomeOdd oco){
+            this.outcomeOdds.add(oco);
+            return this;
+        }
+
+        public Outcome getOutcome() throws OutcomeOddException {
+            return new Outcome(this);
+        }
     }
 }

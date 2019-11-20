@@ -1,6 +1,4 @@
-package com.example.sportsbetting.domain.builders;
-
-import com.example.sportsbetting.domain.*;
+package com.example.sportsbetting.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,38 +36,38 @@ public class DataBuilder {
             //LocalDateTime test2 = LocalDateTime.of(2019, Month.OCTOBER, 02, 20, 50, 00);
             //OutcomeOdd testoo = new OutcomeOddBuilder().setValue(new BigDecimal(1.7)).setValidFrom(test).setValidUntil(test2).getOutcomeOdd();
 
-            OutcomeOdd oo = new OutcomeOddBuilder().setValue(new BigDecimal(1.5))
+            OutcomeOdd oo = new OutcomeOdd.OutcomeOddBuilder().setValue(new BigDecimal(1.5))
                     .setValidFrom(matchStartDate)
                     .setValidUntil(matchEndDate)
                     .getOutcomeOdd();
 
-            OutcomeOdd oo2 = new OutcomeOddBuilder().setValue(new BigDecimal(2))
+            OutcomeOdd oo2 = new OutcomeOdd.OutcomeOddBuilder().setValue(new BigDecimal(2))
                     .setValidFrom(matchStartDate)
                     .setValidUntil(matchEndDate)
                     .getOutcomeOdd();
 
-            OutcomeOdd oo3 = new OutcomeOddBuilder().setValue(new BigDecimal(2.5))
+            OutcomeOdd oo3 = new OutcomeOdd.OutcomeOddBuilder().setValue(new BigDecimal(2.5))
                     .setValidFrom(matchStartDate)
                     .setValidUntil(matchEndDate)
                     .getOutcomeOdd();
 
-            OutcomeOdd oo4 = new OutcomeOddBuilder().setValue(new BigDecimal(3))
+            OutcomeOdd oo4 = new OutcomeOdd.OutcomeOddBuilder().setValue(new BigDecimal(3))
                     .setValidFrom(matchStartDate)
                     .setValidUntil(matchEndDate)
                     .getOutcomeOdd();
 
 
-            Outcome oc = new OutcomeBuilder().setDescription("Borussia Dortmund")
+            Outcome oc = new Outcome.OutcomeBuilder().setDescription("Borussia Dortmund")
                     .addOutcomeOdd(oo)
                     //.addOutcomeOdd(testoo) test for invalid interval
                     .getOutcome();
-            Outcome oc2 = new OutcomeBuilder().setDescription("Salvia Praha")
+            Outcome oc2 = new Outcome.OutcomeBuilder().setDescription("Salvia Praha")
                     .addOutcomeOdd(oo2)
                     .getOutcome();
-            Outcome oc3 = new OutcomeBuilder().setDescription("3 goals")
+            Outcome oc3 = new Outcome.OutcomeBuilder().setDescription("3 goals")
                     .addOutcomeOdd(oo3)
                     .getOutcome();
-            Outcome oc4 = new OutcomeBuilder().setDescription("4 goals")
+            Outcome oc4 = new Outcome.OutcomeBuilder().setDescription("4 goals")
                     .addOutcomeOdd(oo4)
                     .getOutcome();
 
@@ -78,19 +76,19 @@ public class DataBuilder {
             dateValidation(oc3.getOutcomeOdds());
             dateValidation(oc4.getOutcomeOdds());
 
-            Bet bet1 = new BetBuilder().setDescription("winner")
+            Bet bet1 = new Bet.BetBuilder().setDescription("winner")
                     .setType(BetType.WINNER)
                     .addOutcome(oc)
                     .addOutcome(oc2)
                     .getBet();
 
-            Bet bet2 = new BetBuilder().setDescription("number of goals")
+            Bet bet2 = new Bet.BetBuilder().setDescription("number of goals")
                     .setType(BetType.GOALS)
                     .addOutcome(oc3)
                     .addOutcome(oc4)
                     .getBet();
 
-            SportEvent fse = new SportEventBuilder()
+            SportEvent fse = new SportEvent.SportEventBuilder()
                     .setTitle("Salvia Praha vs Borussia Dortmund")
                     .setStartDate(matchStartDate)
                     .setEndDate(matchEndDate)

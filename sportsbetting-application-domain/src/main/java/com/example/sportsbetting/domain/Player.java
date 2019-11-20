@@ -1,16 +1,15 @@
 package com.example.sportsbetting.domain;
 
-import com.example.sportsbetting.domain.builders.PlayerBuilder;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 public class Player extends User{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "account_number")
     private int accountNumber;
@@ -24,22 +23,16 @@ public class Player extends User{
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    public Player(String email, String password, String name, LocalDate birth, Currency currency) {
-        super(email, password);
-        this.name = name;
-        this.balance = BigDecimal.valueOf(0.0);
-        this.birth = birth;
-        this.currency = currency;
+    public Player(PlayerBuilder builder){
+        super(builder.email, builder.password);
+        this.name = builder.name;
+        this.balance = builder.balance;
+        this.birth = builder.birth;
+        this.currency = builder.currency;
+        this.accountNumber = builder.accountNumber;
     }
 
-    public Player(PlayerBuilder builder){
-        super(builder.getEmail(), builder.getPassword());
-        this.name = builder.getName();
-        this.balance = builder.getBalance();
-        this.birth = builder.getBirth();
-        this.currency = builder.getCurrency();
-        this.accountNumber = builder.getAccountNumber();
-    }
+    public int getAccountNumber() {return accountNumber;}
 
     public String getName() {
         return name;
@@ -55,5 +48,61 @@ public class Player extends User{
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public static class PlayerBuilder {
+        private String name;
+        private int accountNumber;
+        private LocalDate birth;
+        private Currency currency;
+        private BigDecimal balance;
+        private String email;
+        private String password;
+
+        public PlayerBuilder() {
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public PlayerBuilder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public PlayerBuilder setBirthDate(LocalDate birth){
+            this.birth = birth;
+            return this;
+        }
+
+        public PlayerBuilder setCurrency(Currency currency){
+            this.currency = currency;
+            return this;
+        }
+
+        public PlayerBuilder setEmail(String email){
+            this.email = email;
+            return this;
+        }
+
+        public PlayerBuilder setPassword(String password){
+            this.password = password;
+            return this;
+        }
+
+        public PlayerBuilder setBalance(BigDecimal balance){
+            this.balance = balance;
+            return this;
+        }
+
+        public PlayerBuilder setAccountNumber(int accountNumber){
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        public Player getPlayer(){
+            return new Player(this);
+        }
     }
 }

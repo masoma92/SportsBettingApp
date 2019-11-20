@@ -1,7 +1,7 @@
 package com.example.sportsbetting.app.service;
 
 import com.example.sportsbetting.domain.*;
-import com.example.sportsbetting.domain.builders.DataBuilder;
+import com.example.sportsbetting.domain.DataBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;

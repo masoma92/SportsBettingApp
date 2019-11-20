@@ -20,12 +20,4 @@ public final class Result {
     public List<Outcome> getWinnerOutcomes() {
         return winnerOutcomes;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 }

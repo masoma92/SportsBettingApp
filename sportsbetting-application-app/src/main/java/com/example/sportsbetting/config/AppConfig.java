@@ -3,14 +3,13 @@ package com.example.sportsbetting.config;
 import com.example.sportsbetting.app.App;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
-import com.example.sportsbetting.domain.builders.DataBuilder;
-import com.example.sportsbetting.domain.builders.PlayerBuilder;
+import com.example.sportsbetting.domain.DataBuilder;
+import com.example.sportsbetting.domain.Player;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -49,7 +48,7 @@ public class AppConfig {
     }
 
     @Bean
-    public PlayerBuilder playerBuilder(){
-        return new PlayerBuilder();
+    public Player.PlayerBuilder playerBuilder(){
+        return new Player.PlayerBuilder();
     }
 }
