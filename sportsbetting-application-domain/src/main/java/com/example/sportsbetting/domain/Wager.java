@@ -90,7 +90,7 @@ public class Wager {
             this.win = false;
         }
 
-        public WagerBuilder setAmout(BigDecimal amount){
+        public WagerBuilder setAmount(BigDecimal amount){
             this.amount=amount;
             return this;
         }

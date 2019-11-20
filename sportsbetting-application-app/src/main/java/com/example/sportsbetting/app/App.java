@@ -39,7 +39,7 @@ public class App {
             BigDecimal amount = view.readWagerAmount();
             if (service.getBuilder().getPlayer().getBalance().compareTo(amount) >= 0){
                 Wager wager = new Wager.WagerBuilder()
-                        .setAmout(amount)
+                        .setAmount(amount)
                         .setOutcomeOdd(oc)
                         .setPlayer(service.getBuilder().getPlayer())
                         .setCurrency(service.getBuilder().getPlayer().getCurrency())

@@ -43,11 +43,6 @@ public class AppConfig {
     }
 
     @Bean
-    public Scanner scanner(){
-        return new Scanner(System.in);
-    }
-
-    @Bean
     public Player.PlayerBuilder playerBuilder(){
         return new Player.PlayerBuilder();
     }

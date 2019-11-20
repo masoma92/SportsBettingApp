@@ -9,28 +9,26 @@ import org.springframework.context.MessageSource;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class View implements IView {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
     private static int accountNumber = 11110;
 
-    @Autowired
     private Scanner in;
+    private Locale locale;
+
     @Autowired
     private Player.PlayerBuilder builder;
     @Autowired
     private MessageSource messageSource;
-    private Locale locale;
+
 
     public View(Locale locale) {
-        logger.info("View bean created!");
         this.locale = locale;
+        in = new Scanner(System.in);
     }
 
 
