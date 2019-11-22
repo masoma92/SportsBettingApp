@@ -3,7 +3,7 @@ package com.example.sportsbetting.config;
 import com.example.sportsbetting.app.App;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
-import com.example.sportsbetting.domain.DataBuilder;
+import com.example.sportsbetting.app.data.DataBuilder;
 import com.example.sportsbetting.domain.Player;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,10 +12,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.Locale;
-import java.util.Scanner;
 
 @Configuration
-@Import({MessageSourceConfig.class})
+@Import({MessageSourceConfig.class, JpaConfig.class})
 @PropertySource(value = { "classpath:config.properties" }, encoding = "UTF-8")
 public class AppConfig {
 
@@ -24,7 +23,7 @@ public class AppConfig {
 
     @Bean
     public App app(){
-        return new App(service(), view());
+        return new App();
     }
 
     @Bean

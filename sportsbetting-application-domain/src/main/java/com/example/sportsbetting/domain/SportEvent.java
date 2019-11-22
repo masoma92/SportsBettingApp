@@ -14,20 +14,24 @@ public abstract class SportEvent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    final private String title;
+    private String title;
 
     @Column(name = "start_date")
-    final private LocalDateTime startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    final private LocalDateTime endDate;
+    private LocalDateTime endDate;
 
     @OneToOne
     @JoinColumn(name = "result_id")
     private Result result;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Bet> bets;
+
+    public SportEvent(){
+
+    }
 
     public SportEvent(SportEventBuilder builder) {
         this.title = builder.title; //sport event name

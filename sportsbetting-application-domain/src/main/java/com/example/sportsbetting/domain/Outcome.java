@@ -11,14 +11,19 @@ public class Outcome {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    final private String description; //eg.: 0 goal or 1 goal etc.
+    private String description; //eg.: 0 goal or 1 goal etc.
 
     //mapped in Bet
     @ManyToOne
     private Bet bet;
 
-    @OneToMany(mappedBy = "outcome")
+    // cascadetype = persistence will propagate (kiterjeszt) to the relating entities
+    @OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL)
     private List<OutcomeOdd> outcomeOdds;
+
+    public Outcome(){
+
+    }
 
     public Outcome(OutcomeBuilder builder) throws OutcomeOddException {
         this.description = builder.description;

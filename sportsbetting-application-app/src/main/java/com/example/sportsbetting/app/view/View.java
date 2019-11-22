@@ -1,9 +1,6 @@
 package com.example.sportsbetting.app.view;
 
 import com.example.sportsbetting.domain.*;
-import javafx.application.Application;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
@@ -15,7 +12,7 @@ import java.util.Scanner;
 
 public class View implements IView {
 
-    private static int accountNumber = 11110;
+    private static int accountNumber = 0;
 
     private Scanner in;
     private Locale locale;
@@ -25,12 +22,10 @@ public class View implements IView {
     @Autowired
     private MessageSource messageSource;
 
-
     public View(Locale locale) {
         this.locale = locale;
         in = new Scanner(System.in);
     }
-
 
     public Player readPlayerData(){
         try {
@@ -58,7 +53,7 @@ public class View implements IView {
             System.out.println(messageSource.getMessage("question_currency", null, "defaultQC", locale));
             builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
 
-            builder.setAccountNumber(accountNumber++);
+            builder.setAccountNumber(++accountNumber);
             builder.setBirthDate(LocalDate.of(1912, 12, 12));
 
             return builder.getPlayer();
@@ -75,6 +70,7 @@ public class View implements IView {
 
     public void printBalance(Player player){
         System.out.println(messageSource.getMessage("balance", new Object[] {player.getBalance().toString(), player.getCurrency()}, "defB", locale));
+        System.out.println();
     }
 
     public void printOutcomeOdds(List<SportEvent> events){

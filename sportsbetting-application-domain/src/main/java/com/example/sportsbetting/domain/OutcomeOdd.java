@@ -11,7 +11,7 @@ public class OutcomeOdd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    final private BigDecimal value; //winning*
+    private BigDecimal value; //winning*
 
     @Column(name = "valid_from")
     private LocalDateTime validFrom; //this value valid from
@@ -22,6 +22,10 @@ public class OutcomeOdd {
     @ManyToOne
     @JoinColumn(name = "outcome_id")
     private Outcome outcome;
+
+    public OutcomeOdd(){
+
+    }
 
     public OutcomeOdd(OutcomeOddBuilder oob) {
         this.value = oob.value;

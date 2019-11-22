@@ -1,4 +1,6 @@
-package com.example.sportsbetting.domain;
+package com.example.sportsbetting.app.data;
+
+import com.example.sportsbetting.domain.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,7 +19,7 @@ public class DataBuilder {
         wagers = new ArrayList<>();
     }
 
-    void dateValidation(List<OutcomeOdd> outcomeOdds) throws OutcomeOddException{
+    void dateValidation(List<OutcomeOdd> outcomeOdds) throws OutcomeOddException {
         for (int i = 0; i < outcomeOdds.size(); i++){
             if (i < outcomeOdds.size()-1 && outcomeOdds.get(i).getValidUntil().isAfter(outcomeOdds.get(i+1).getValidFrom())){
                 throw new OutcomeOddException(outcomeOdds.get(i), outcomeOdds.get(i+1));

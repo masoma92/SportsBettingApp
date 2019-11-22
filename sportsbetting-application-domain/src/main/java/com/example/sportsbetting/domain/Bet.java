@@ -11,7 +11,7 @@ public class Bet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    final private String description; //eg.:number of goals
+    private String description; //eg.:number of goals
 
     @Enumerated(EnumType.STRING)
     private BetType type;
@@ -21,8 +21,12 @@ public class Bet {
     @JoinColumn(name = "event_id")
     private SportEvent event;
 
-    @OneToMany(mappedBy = "bet")
+    @OneToMany(mappedBy = "bet", cascade = CascadeType.ALL)
     private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
+
+    public Bet(){
+
+    }
     
     public Bet(BetBuilder builder) {
         this.description = builder.description;

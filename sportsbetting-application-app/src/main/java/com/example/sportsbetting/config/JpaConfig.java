@@ -59,4 +59,5 @@ public class JpaConfig {
         return new DriverManagerDataSource(dbUrl, username, password);
     }
 
+
 }

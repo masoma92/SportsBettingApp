@@ -5,17 +5,19 @@ import com.example.sportsbetting.app.view.View;
 import com.example.sportsbetting.domain.OutcomeOdd;
 import com.example.sportsbetting.domain.SportEvent;
 import com.example.sportsbetting.domain.Wager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class App {
+
+    @Autowired
     private SportsBettingService service;
+    @Autowired
     private View view;
 
-    public App(SportsBettingService service, View view) {
-        this.service = service;
-        this.view = view;
+    public App() {
     }
 
     public void play(){

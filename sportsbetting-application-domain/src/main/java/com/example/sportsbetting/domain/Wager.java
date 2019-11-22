@@ -10,10 +10,10 @@ public class Wager {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    final private BigDecimal amount;
+    private BigDecimal amount;
 
     @Column(name = "timestamp_created")
-    final private LocalDateTime timestampCreated; //when the wager created
+    private LocalDateTime timestampCreated; //when the wager created
 
     private boolean processed; //true if it has paid
 
@@ -29,6 +29,10 @@ public class Wager {
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    public Wager(){
+
+    }
 
     public Wager(WagerBuilder builder) {
         this.amount = builder.amount;

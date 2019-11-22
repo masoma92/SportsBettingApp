@@ -14,14 +14,18 @@ public class Player extends User{
     @Column(name = "account_number")
     private int accountNumber;
 
-    final private String name;
+    private String name;
 
     private BigDecimal balance;
 
-    final private LocalDate birth;
+    private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    public Player(){
+
+    }
 
     public Player(PlayerBuilder builder){
         super(builder.email, builder.password);
