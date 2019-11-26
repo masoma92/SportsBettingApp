@@ -38,6 +38,8 @@ public class App {
         while (service.getBuilder().getPlayer().getBalance().compareTo(BigDecimal.ZERO) > 0){
             view.printOutcomeOdds(events);
             OutcomeOdd oc = view.selectOutcomeOdd(events);
+            if (oc == null)
+                break;
             BigDecimal amount = view.readWagerAmount();
             if (service.getBuilder().getPlayer().getBalance().compareTo(amount) >= 0){
                 Wager wager = new Wager.WagerBuilder()
