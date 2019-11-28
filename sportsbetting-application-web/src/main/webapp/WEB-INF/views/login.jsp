@@ -1,9 +1,9 @@
 <html>
     <head>
-        <script src="styles/js/bootstrap.min.js"></script>
+        <script src="../../resources/styles/js/bootstrap.min.js"></script>
         <title>Sportsbetting web application</title>
         <link rel="stylesheet"
-              href="styles/css/bootstrap.min.css" />
+              href="../../resources/styles/css/bootstrap.min.css" />
     </head>
     <body>
     <div class="container">
