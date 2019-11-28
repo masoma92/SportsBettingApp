@@ -100,6 +100,8 @@ public class DataBuilder {
             fse.addBet(bet2);
 
             this.addEvent(fse);
+            //for web!
+            this.player = new Player.PlayerBuilder().setEmail("soma.makai@gmail.com").setPassword("almafa").getPlayer();
         }
         catch (OutcomeOddException e){
             System.out.println(e.getMessage());
