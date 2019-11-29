@@ -15,4 +15,8 @@ public class TennisSportEvent extends SportEvent {
         super(builder);
     }
 
+    @Override
+    public String getType() {
+        return "Tennis match";
+    }
 }

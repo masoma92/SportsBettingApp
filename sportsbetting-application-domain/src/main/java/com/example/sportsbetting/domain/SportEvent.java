@@ -2,6 +2,7 @@ package com.example.sportsbetting.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public abstract class SportEvent {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Bet> bets;
 
+    public String getType(){
+        return "Sport event";
+    }
+
     public SportEvent(){
 
     }
@@ -51,12 +56,13 @@ public abstract class SportEvent {
         return bets;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    // for the homeview it looks better
+    public String getStartDate() {
+        return startDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
+    public String getEndDate() {
+        return endDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     public int getId() {

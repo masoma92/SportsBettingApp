@@ -15,4 +15,9 @@ public class FootballSportEvent extends SportEvent {
         super(builder);
     }
 
+    @Override
+    public String getType() {
+        return "Football match";
+    }
+
 }

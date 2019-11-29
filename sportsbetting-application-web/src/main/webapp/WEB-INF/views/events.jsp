@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">SportsBetting</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -52,6 +52,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Type</th>
                 <th scope="col">Start date</th>
                 <th scope="col">End date</th>
             </tr>
@@ -61,6 +62,7 @@
                 <tr>
                     <td><c:out value="${item.getId()}" /></td>
                     <td><c:out value="${item.getTitle()}" /></td>
+                    <td><c:out value="${item.getType()}" /></td>
                     <td><c:out value="${item.getStartDate()}" /></td>
                     <td><c:out value="${item.getEndDate()}" /></td>
                 </tr>

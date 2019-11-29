@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">SportsBetting</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,7 +49,7 @@
 <div class="m-3">
     <div class="card">
         <h5 class="card-header">Featured</h5>
-        <form method="post" >
+        <form method="post" class="m-3">
             <div class="form-group">
                 <label>Name</label>
                 <input class="form-control" placeholder="Enter name" name="playername">
@@ -102,12 +102,12 @@
                     <tr>
                         <td><button type="button" class="btn btn-primary">Remove</button></td>
                         <td><c:out value="${item.getId()}" /></td>
-                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getTitle()}" /></td>
-                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getTitle()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getTitle()} - ${item.getOdd().getOutcome().getBet().getEvent().getStartDate()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getType()}" /></td>
                         <td><c:out value="${item.getOdd().getOutcome().getBet().getType()}" /></td>
                         <td><c:out value="${item.getOdd().getOutcome().getDescription()}" /></td>
                         <td><c:out value="${item.getOdd().getValue()}" /></td>
-                        <td><c:out value="${item.getAmount()}" /></td>
+                        <td><c:out value="${item.getAmount()} ${item.getCurrency()}" /></td>
                         <td><c:out value="${item.isWin()}" /></td>
                         <td><c:out value="${item.isProcessed()}" /></td>
                     </tr>

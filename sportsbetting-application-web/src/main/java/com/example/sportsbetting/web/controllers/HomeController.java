@@ -43,6 +43,7 @@ public class HomeController {
         playerRepository.save(player);
         model.setViewName("home");
         model.addObject("player", player);
+        model.addObject("wagers", wagerRepository.findAll());
         return model;
     }
 }
