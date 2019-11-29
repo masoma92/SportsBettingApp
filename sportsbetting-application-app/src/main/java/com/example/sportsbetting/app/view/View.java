@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class View implements IView {
 
-    private static int accountNumber = 0;
-
     private Scanner in;
     private Locale locale;
 
@@ -53,7 +51,7 @@ public class View implements IView {
             System.out.println(messageSource.getMessage("question_currency", null, "defaultQC", locale));
             builder.setCurrency(Currency.valueOf(in.nextLine().toUpperCase()));
 
-            builder.setAccountNumber(++accountNumber);
+            builder.setAccountNumber("0");
             builder.setBirthDate(LocalDate.of(1912, 12, 12));
 
             return builder.getPlayer();

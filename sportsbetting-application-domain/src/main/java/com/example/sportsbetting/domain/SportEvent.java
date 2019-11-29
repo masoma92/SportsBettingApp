@@ -26,7 +26,7 @@ public abstract class SportEvent {
     @JoinColumn(name = "result_id")
     private Result result;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Bet> bets;
 
     public SportEvent(){
@@ -49,6 +49,18 @@ public abstract class SportEvent {
 
     public List<Bet> getBets() {
         return bets;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setResult(Result result) {

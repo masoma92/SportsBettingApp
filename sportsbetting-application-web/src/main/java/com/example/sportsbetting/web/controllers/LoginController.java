@@ -14,15 +14,15 @@ public class LoginController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getLoginPage() {
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    public ModelAndView getDefaultPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
         return model;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView postLoginPage(String input_email, String input_password) {
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
+    public ModelAndView postDefaultPage(String input_email, String input_password) {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
 
@@ -32,6 +32,4 @@ public class LoginController {
         }
         return model;
     }
-
-
 }

@@ -30,6 +30,10 @@ public class Wager {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
+    public int getId() {
+        return id;
+    }
+
     public Wager(){
 
     }

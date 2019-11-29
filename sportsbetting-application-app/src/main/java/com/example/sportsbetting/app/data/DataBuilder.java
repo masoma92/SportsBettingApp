@@ -3,9 +3,11 @@ package com.example.sportsbetting.app.data;
 import com.example.sportsbetting.domain.*;
 import com.example.sportsbetting.repository.PlayerRepository;
 import com.example.sportsbetting.repository.SportEventRepository;
+import com.example.sportsbetting.repository.WagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ public class DataBuilder {
 
     @Autowired
     private SportEventRepository sportEventRepository;
+
+    @Autowired
+    private WagerRepository wagerRepository;
 
     public DataBuilder() {
         events = new ArrayList<>();
@@ -110,10 +115,17 @@ public class DataBuilder {
 
             this.addEvent(fse);
             //for web!
-            this.player = new Player.PlayerBuilder().setEmail("soma.makai@gmail.com").setPassword("almafa").getPlayer();
+            this.player = new Player.PlayerBuilder()
+                    .setEmail("soma.makai@gmail.com")
+                    .setPassword("almafa").getPlayer();
             this.playerRepository.save(this.player);
             this.sportEventRepository.saveAll(this.events);
 
+            this.wagers.add(new Wager.WagerBuilder().setPlayer(player).setAmount(BigDecimal.valueOf(200)).setOutcomeOdd(oo).setCurrency(Currency.HUF).getWager());
+            this.wagers.add(new Wager.WagerBuilder().setPlayer(player).setAmount(BigDecimal.valueOf(200)).setOutcomeOdd(oo2).setCurrency(Currency.HUF).getWager());
+            this.wagers.add(new Wager.WagerBuilder().setPlayer(player).setAmount(BigDecimal.valueOf(200)).setOutcomeOdd(oo4).setCurrency(Currency.HUF).getWager());
+
+            this.wagerRepository.saveAll(this.wagers);
         }
         catch (OutcomeOddException e){
             System.out.println(e.getMessage());

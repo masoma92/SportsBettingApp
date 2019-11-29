@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Soma
@@ -8,9 +9,113 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <script src="../../resources/styles/js/bootstrap.min.js"></script>
+    <title>Home</title>
+    <link rel="stylesheet"
+          href="../../resources/styles/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Hello world!</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="home">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="events">Events</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">HU</a>
+                    <a class="dropdown-item" href="#">EN</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <a href="login" class="btn btn-outline-success my-2 my-sm-0" role="button">Logout</a>
+        </ul>
+    </div>
+</nav>
+
+
+
+<div class="m-3">
+    <div class="card">
+        <h5 class="card-header">Featured</h5>
+        <form method="post" >
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" placeholder="Enter name" name="playername">
+            </div>
+            <div class="form-group">
+                <label>Date of birth</label>
+                <input type="date" class="form-control" placeholder="Enter date of birth" name="dateofbirth">
+            </div>
+            <div class="form-group">
+                <label>Account number</label>
+                <input class="form-control" placeholder="XXXXXXXX-XXXXXXXX" name="accountnumber" pattern="^\d{8}-\d{8}$">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="currency">
+                    <option>HUF</option>
+                    <option>EUR</option>
+                    <option>USD</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Balance</label>
+                <input type="number" class="form-control"placeholder="Enter balance" name="balance">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+<div class="m-3">
+    <div class="card">
+        <h5 class="card-header">Wagers</h5>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"> </th>
+                <th scope="col">#</th>
+                <th scope="col">Event title</th>
+                <th scope="col">Event type</th>
+                <th scope="col">Bet type</th>
+                <th scope="col">Outcome value</th>
+                <th scope="col">Outcome odd</th>
+                <th scope="col">Wager amount</th>
+                <th scope="col">Winner</th>
+                <th scope="col">Processed</th>
+            </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${wagers}" var="item">
+                    <tr>
+                        <td><button type="button" class="btn btn-primary">Remove</button></td>
+                        <td><c:out value="${item.getId()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getTitle()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getBet().getEvent().getTitle()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getBet().getType()}" /></td>
+                        <td><c:out value="${item.getOdd().getOutcome().getDescription()}" /></td>
+                        <td><c:out value="${item.getOdd().getValue()}" /></td>
+                        <td><c:out value="${item.getAmount()}" /></td>
+                        <td><c:out value="${item.isWin()}" /></td>
+                        <td><c:out value="${item.isProcessed()}" /></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>

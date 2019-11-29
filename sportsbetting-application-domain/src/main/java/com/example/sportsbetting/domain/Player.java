@@ -1,5 +1,7 @@
 package com.example.sportsbetting.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,7 +14,7 @@ public class Player extends User{
     private int id;
 
     @Column(name = "account_number")
-    private int accountNumber;
+    private String accountNumber;
 
     private String name;
 
@@ -36,7 +38,7 @@ public class Player extends User{
         this.accountNumber = builder.accountNumber;
     }
 
-    public int getAccountNumber() {return accountNumber;}
+    public String getAccountNumber() {return accountNumber;}
 
     public String getName() {
         return name;
@@ -50,13 +52,33 @@ public class Player extends User{
         return currency;
     }
 
+    public LocalDate getBirth() {
+        return birth;
+    }
+
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirth(LocalDate birth) {
+        this.birth = birth;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     public static class PlayerBuilder {
         private String name;
-        private int accountNumber;
+        private String accountNumber;
         private LocalDate birth;
         private Currency currency;
         private BigDecimal balance;
@@ -100,7 +122,7 @@ public class Player extends User{
             return this;
         }
 
-        public PlayerBuilder setAccountNumber(int accountNumber){
+        public PlayerBuilder setAccountNumber(String accountNumber){
             this.accountNumber = accountNumber;
             return this;
         }

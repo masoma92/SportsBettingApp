@@ -18,7 +18,7 @@ public class Outcome {
     private Bet bet;
 
     // cascadetype = persistence will propagate (kiterjeszt) to the relating entities
-    @OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OutcomeOdd> outcomeOdds;
 
     public Outcome(){
