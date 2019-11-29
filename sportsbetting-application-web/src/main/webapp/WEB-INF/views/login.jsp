@@ -12,14 +12,14 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign In</h5>
-                        <form class="form-signin">
+                        <form class="form-signin" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input name="input_email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <input name="input_password" type="password" class="form-control" id="exampleInputPassword1">
                             </div>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                         </form>

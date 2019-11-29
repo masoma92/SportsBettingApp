@@ -1,6 +1,9 @@
 package com.example.sportsbetting.app.data;
 
 import com.example.sportsbetting.domain.*;
+import com.example.sportsbetting.repository.PlayerRepository;
+import com.example.sportsbetting.repository.SportEventRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,6 +16,12 @@ public class DataBuilder {
     private List<SportEvent> events;
     private Player player;
     private List<Wager> wagers;
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
+    private SportEventRepository sportEventRepository;
 
     public DataBuilder() {
         events = new ArrayList<>();
@@ -102,6 +111,9 @@ public class DataBuilder {
             this.addEvent(fse);
             //for web!
             this.player = new Player.PlayerBuilder().setEmail("soma.makai@gmail.com").setPassword("almafa").getPlayer();
+            this.playerRepository.save(this.player);
+            this.sportEventRepository.saveAll(this.events);
+
         }
         catch (OutcomeOddException e){
             System.out.println(e.getMessage());

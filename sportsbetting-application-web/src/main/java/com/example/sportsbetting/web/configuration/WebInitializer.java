@@ -23,28 +23,27 @@ public class WebInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext container) throws ServletException {
         try(AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext()){
 
-            ConfigurableApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);
             ctx.register(WebConfig.class);
 
             ctx.setServletContext(container);
 
+            //web xml helyett
             ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
 
             servlet.setLoadOnStartup(1);
             servlet.addMapping("/");
 
-            DataBuilder dataBuilder = appContext.getBean(DataBuilder.class);
-            List<SportEvent> sportEvents = dataBuilder.getEvents();
-            Player player = dataBuilder.getPlayer();
+            /*ConfigurableApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
+            DataBuilder dataBuilder = appContext.getBean(DataBuilder.class);
             SportEventRepository sportEventRepository = appContext.getBean(SportEventRepository.class);
             PlayerRepository playerRepository = appContext.getBean(PlayerRepository.class);
 
+            List<SportEvent> sportEvents = dataBuilder.getEvents();
+            Player player = dataBuilder.getPlayer();
+
             sportEventRepository.saveAll(sportEvents);
-            playerRepository.save(player);
-
+            playerRepository.save(player);*/
         }
-
-
     }
 }
