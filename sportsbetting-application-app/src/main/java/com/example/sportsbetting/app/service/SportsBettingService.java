@@ -8,6 +8,8 @@ import com.example.sportsbetting.repository.WagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -59,7 +61,14 @@ public class SportsBettingService implements ISportBettingService {
     }
 
     public void calculateResults(){
+
         List<Wager> wagers = this.builder.getWagers();
+
+        for (Wager wager : wagers){
+            BigDecimal newBalance = wager.getPlayer().getBalance().subtract(wager.getAmount());
+            this.builder.getPlayer().setBalance(newBalance);
+            playerRepository.save(this.builder.getPlayer());
+        }
 
         List<Outcome> winnerOutcomes = new ArrayList<>();
 
@@ -72,17 +81,22 @@ public class SportsBettingService implements ISportBettingService {
 
     private void chooseWinningOutcomes(List<Outcome> winnerOutcomes){
         for (SportEvent se : this.builder.getEvents()){
-            for (Bet b : se.getBets()){
-                for (Outcome o : b.getOutcomes()){
-                    if(new Random().nextBoolean()){
-                        winnerOutcomes.add(o);
-                        break;
+            if (LocalDate.parse(se.getStartDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).isBefore(LocalDate.now())){
+                List<Outcome> winnerOutcomesForEvent = new ArrayList<>();
+                for (Bet b : se.getBets()){
+                    for (Outcome o : b.getOutcomes()){
+                        if(new Random().nextBoolean()){
+                            winnerOutcomes.add(o);
+                            winnerOutcomesForEvent.add(o);
+                            break;
+                        }
                     }
                 }
+                Result r = new Result(winnerOutcomesForEvent);
+                se.setResult(r);
+                resultRepository.save(r);
+                winnerOutcomesForEvent.clear();
             }
-            Result r = new Result(winnerOutcomes);
-            se.setResult(r);
-            resultRepository.save(r);
         }
     }
 

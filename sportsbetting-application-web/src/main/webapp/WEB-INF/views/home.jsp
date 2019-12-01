@@ -48,7 +48,7 @@
 
 <div class="m-3">
     <div class="card">
-        <h5 class="card-header">Featured</h5>
+        <h5 class="card-header">Account details</h5>
         <form method="post" class="m-3">
             <div class="form-group">
                 <label>Name</label>
@@ -72,10 +72,38 @@
             </div>
             <div class="form-group">
                 <label>Balance</label>
-                <input type="number" class="form-control"placeholder="Enter balance" name="balance">
+                <input type="number" min="1000" class="form-control"placeholder="Minimum amount 1000" name="balance">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
+    </div>
+</div>
+
+<div class="m-3">
+    <div class="card">
+        <h5 class="card-header">Player info</h5>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Account number</th>
+                <th scope="col">Birth</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Currency</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${player.getName()}</td>
+                <td>${player.getEmail()}</td>
+                <td>${player.getAccountNumber()}</td>
+                <td>${player.getBirth()}</td>
+                <td>${player.getBalance()}</td>
+                <td>${player.getCurrency()}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

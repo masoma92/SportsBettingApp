@@ -19,13 +19,13 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.example.sportsbetting.repository")
 public class JpaConfig {
 
-    /*private static String dbUrl = "jdbc:mysql://localhost/sportsbetting_soma_makai?serverTimezone=Europe/Budapest";
+    private static String dbUrl = "jdbc:mysql://localhost/sportsbetting_soma_makai?serverTimezone=Europe/Budapest";
     private static String username = "root";
-    private static String password = "root";*/
+    private static String password = "root";
 
-    private static String dbUrl = "jdbc:mysql://remotemysql.com/8nKKIMpyFt?serverTimezone=Europe/Budapest";
+    /*private static String dbUrl = "jdbc:mysql://remotemysql.com/8nKKIMpyFt?serverTimezone=Europe/Budapest";
     private static String username = "8nKKIMpyFt";
-    private static String password = "iy2sRBsZxO";
+    private static String password = "iy2sRBsZxO";*/
 
     //creates entity manager
     @Bean

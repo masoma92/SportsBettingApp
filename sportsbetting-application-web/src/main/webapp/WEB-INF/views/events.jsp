@@ -10,7 +10,7 @@
 <html>
 <head>
     <script src="../../resources/styles/js/bootstrap.min.js"></script>
-    <title>Home</title>
+    <title>Events</title>
     <link rel="stylesheet"
           href="../../resources/styles/css/bootstrap.min.css" />
 </head>

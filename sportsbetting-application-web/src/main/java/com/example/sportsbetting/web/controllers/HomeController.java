@@ -1,9 +1,9 @@
 package com.example.sportsbetting.web.controllers;
 
+import com.example.sportsbetting.app.data.DataBuilder;
+import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.domain.Currency;
 import com.example.sportsbetting.domain.Player;
-import com.example.sportsbetting.repository.PlayerRepository;
-import com.example.sportsbetting.repository.WagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,33 +17,36 @@ import java.time.LocalDate;
 public class HomeController {
 
     @Autowired
-    private PlayerRepository playerRepository;
+    private SportsBettingService service;
 
     @Autowired
-    private WagerRepository wagerRepository;
+    private DataBuilder builder;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHomePage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("home");
-        model.addObject("player", playerRepository.findById(1).get());
-        model.addObject("wagers", wagerRepository.findAll());
+        model.addObject("player", builder.getPlayer());
+        model.addObject("wagers", builder.getWagers());
         return model;
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ModelAndView setPlayer(String playername, String dateofbirth, String accountnumber, String currency, BigDecimal balance) {
         ModelAndView model = new ModelAndView();
-        Player player = playerRepository.findById(1).get();
+        Player player = builder.getPlayer();
         player.setName(playername);
         player.setBirth(LocalDate.of(Integer.parseInt(dateofbirth.split("-")[0]),Integer.parseInt(dateofbirth.split("-")[1]), Integer.parseInt(dateofbirth.split("-")[1])));
         player.setAccountNumber(accountnumber);
         player.setCurrency(Currency.valueOf(currency));
         player.setBalance(balance);
-        playerRepository.save(player);
+        service.savePlayer(player);
+        service.calculateResults();
+
         model.setViewName("home");
         model.addObject("player", player);
-        model.addObject("wagers", wagerRepository.findAll());
+        model.addObject("wagers", builder.getWagers());
+
         return model;
     }
 }
