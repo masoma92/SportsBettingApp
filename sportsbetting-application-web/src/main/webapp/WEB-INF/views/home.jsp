@@ -52,15 +52,15 @@
         <form method="post" class="m-3">
             <div class="form-group">
                 <label>Name</label>
-                <input class="form-control" placeholder="Enter name" name="playername">
+                <input class="form-control" placeholder="Enter name" name="playername" required>
             </div>
             <div class="form-group">
                 <label>Date of birth</label>
-                <input type="date" class="form-control" placeholder="Enter date of birth" name="dateofbirth">
+                <input type="date" class="form-control" placeholder="Enter date of birth" name="dateofbirth" required>
             </div>
             <div class="form-group">
                 <label>Account number</label>
-                <input class="form-control" placeholder="XXXXXXXX-XXXXXXXX" name="accountnumber" pattern="^\d{8}-\d{8}$">
+                <input class="form-control" placeholder="XXXXXXXX-XXXXXXXX" name="accountnumber" pattern="^\d{8}-\d{8}$" required>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Example select</label>
@@ -72,7 +72,7 @@
             </div>
             <div class="form-group">
                 <label>Balance</label>
-                <input type="number" min="1000" class="form-control"placeholder="Minimum amount 1000" name="balance">
+                <input type="number" min="1000" class="form-control"placeholder="Minimum amount 1000" name="balance" required>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>

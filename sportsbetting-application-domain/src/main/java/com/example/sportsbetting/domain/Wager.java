@@ -83,6 +83,10 @@ public class Wager {
         this.win = win;
     }
 
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     public static class WagerBuilder {
         private BigDecimal amount;
         private LocalDateTime timestampCreated; //when the wager created

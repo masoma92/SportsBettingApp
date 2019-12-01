@@ -67,7 +67,9 @@ public class SportsBettingService implements ISportBettingService {
         for (Wager wager : wagers){
             BigDecimal newBalance = wager.getPlayer().getBalance().subtract(wager.getAmount());
             this.builder.getPlayer().setBalance(newBalance);
+            wager.setCurrency(wager.getPlayer().getCurrency());
             playerRepository.save(this.builder.getPlayer());
+            wagerRepository.save(wager);
         }
 
         List<Outcome> winnerOutcomes = new ArrayList<>();
