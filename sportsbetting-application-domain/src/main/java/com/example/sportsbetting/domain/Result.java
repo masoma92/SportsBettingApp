@@ -13,6 +13,9 @@ public final class Result {
     @OneToMany
     List<Outcome> winnerOutcomes; //1 event all outcomes
 
+    public Result() {
+    }
+
     public Result(List<Outcome> winnerOutcomes){
         this.winnerOutcomes = winnerOutcomes;
     }

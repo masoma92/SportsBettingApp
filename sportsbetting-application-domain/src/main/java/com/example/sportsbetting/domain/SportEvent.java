@@ -56,7 +56,7 @@ public abstract class SportEvent {
         return bets;
     }
 
-    // for the homeview it looks better
+    // for the web_homeview it looks better
     public String getStartDate() {
         return startDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }

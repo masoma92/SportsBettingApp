@@ -106,7 +106,7 @@ public class DataBuilder {
                     .addOutcomeOdd(oo4)
                     .getOutcome();
 
-            Outcome oc5 = new Outcome.OutcomeBuilder().setDescription("Lewandowski Robert score a goal")
+            Outcome oc5 = new Outcome.OutcomeBuilder().setDescription("Robert Lewandowski scores a goal")
                     .addOutcomeOdd(oo5)
                     .getOutcome();
             Outcome oc6 = new Outcome.OutcomeBuilder().setDescription("Bayern München")

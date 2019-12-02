@@ -1,7 +1,5 @@
 package com.example.sportsbetting.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
