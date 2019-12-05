@@ -1,6 +1,5 @@
 package com.example.sportsbetting.web.controllers;
 
-import com.example.sportsbetting.app.data.DataBuilder;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.domain.Currency;
 import com.example.sportsbetting.domain.Player;
@@ -8,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -24,17 +21,14 @@ public class HomeController {
     private SportsBettingService service;
 
     @Autowired
-    private DataBuilder builder;
-
-    @Autowired
     MessageSource messageSource;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHomePage(Locale locale) {
         ModelAndView model = new ModelAndView();
         model.setViewName("home");
-        model.addObject("player", builder.getPlayer());
-        model.addObject("wagers", builder.getWagers());
+        model.addObject("player", service.findPlayer());
+        model.addObject("wagers", service.getBuilder().getWagers());
         localizeHome(model, locale);
 
         locale = LocaleContextHolder.getLocale();
@@ -45,7 +39,7 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ModelAndView setPlayer(Locale locale, String playername, String dateofbirth, String accountnumber, String currency, BigDecimal balance) {
         ModelAndView model = new ModelAndView();
-        Player player = builder.getPlayer();
+        Player player = service.findPlayer();
         player.setName(playername);
         player.setBirth(LocalDate.of(Integer.parseInt(dateofbirth.split("-")[0]),Integer.parseInt(dateofbirth.split("-")[1]), Integer.parseInt(dateofbirth.split("-")[1])));
         player.setAccountNumber(accountnumber);
@@ -55,8 +49,8 @@ public class HomeController {
         service.calculateResults();
 
         model.setViewName("home");
-        model.addObject("player", player);
-        model.addObject("wagers", builder.getWagers());
+        model.addObject("player", service.findPlayer());
+        model.addObject("wagers", service.getBuilder().getWagers());
 
         localizeHome(model, locale);
 
@@ -65,9 +59,9 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
-    public String removeWager(@PathVariable("id")int id){
-        service.deleteWager(id);
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String removeWager(String wagerId){
+        service.deleteWager(Integer.parseInt(wagerId));
         return "redirect:/home";
     }
 

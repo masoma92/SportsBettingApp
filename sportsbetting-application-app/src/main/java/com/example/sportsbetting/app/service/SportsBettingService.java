@@ -59,9 +59,10 @@ public class SportsBettingService implements ISportBettingService {
     public void deleteWager(int id){
         Wager wager = wagerRepository.findById(id).get();
         BigDecimal newBalance = wager.getAmount().add(wager.getPlayer().getBalance());
-        this.builder.getPlayer().setBalance(newBalance);
-        playerRepository.save(this.builder.getPlayer());
-        wagerRepository.delete(wager);
+        wager.getPlayer().setBalance(newBalance);
+        playerRepository.save(wager.getPlayer());
+        this.builder.getWagers().remove(this.builder.getWagerById(id));
+        wagerRepository.deleteById(id);
     }
 
     public List<Wager> findAllWagers(){

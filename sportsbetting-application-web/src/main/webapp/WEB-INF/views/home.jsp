@@ -131,8 +131,9 @@
                 <c:forEach items="${wagers}" var="item">
                     <tr>
                         <td>
-                            <form method="post" action="remove/${item.getId()}">
-                                <input type="submit" value="${remove_button}" class="btn btn-primary"></input>
+                            <form method="post" action="remove">
+                                <input type="hidden" name="wagerId" value="${item.getId()}">
+                                <button type="submit" class="btn btn-primary">${remove_button}</button>
                             </form>
                         </td>
                         <td><c:out value="${item.getId()}" /></td>

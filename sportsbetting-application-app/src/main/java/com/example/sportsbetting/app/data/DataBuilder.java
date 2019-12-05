@@ -1,6 +1,5 @@
 package com.example.sportsbetting.app.data;
 
-import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.domain.*;
 import com.example.sportsbetting.repository.PlayerRepository;
 import com.example.sportsbetting.repository.SportEventRepository;
@@ -8,16 +7,17 @@ import com.example.sportsbetting.repository.WagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataBuilder {
 
+    @Autowired
     private List<SportEvent> events;
+    @Autowired
     private Player player;
+    @Autowired
     private List<Wager> wagers;
 
     @Autowired
@@ -30,17 +30,6 @@ public class DataBuilder {
     private WagerRepository wagerRepository;
 
     public DataBuilder() {
-        events = new ArrayList<>();
-        wagers = new ArrayList<>();
-    }
-
-    void dateValidation(List<OutcomeOdd> outcomeOdds) throws OutcomeOddException {
-        for (int i = 0; i < outcomeOdds.size(); i++){
-            if (i < outcomeOdds.size()-1 && outcomeOdds.get(i).getValidUntil().isAfter(outcomeOdds.get(i+1).getValidFrom())){
-                throw new OutcomeOddException(outcomeOdds.get(i), outcomeOdds.get(i+1));
-            }
-            outcomeOdds.get(i).setOutcome(outcomeOdds.get(i).getOutcome());
-        }
     }
 
     public void buildingData(){
@@ -170,8 +159,9 @@ public class DataBuilder {
 
             //for web!
             this.player = new Player.PlayerBuilder()
-                    .setEmail("soma.makai@gmail.com")
-                    .setPassword("almafa").getPlayer();
+                    .setEmail("user@oe.hu")
+                    .setPassword("almafa")
+                    .setBalance(new BigDecimal(0)).getPlayer();
 
             this.playerRepository.save(player);
 
@@ -188,11 +178,6 @@ public class DataBuilder {
         catch (OutcomeOddException e){
             System.out.println(e.getMessage());
         }
-    }
-
-    public DataBuilder setPlayer(Player player){
-        this.player = player;
-        return this;
     }
 
     public DataBuilder addWager(Wager wager){
@@ -213,7 +198,28 @@ public class DataBuilder {
         return player;
     }
 
+    public void setPlayer(Player player){
+        this.player = player;
+    }
+
     public List<Wager> getWagers() {
-        return wagers;
+        return this.wagers;
+    }
+
+    public Wager getWagerById(int id){
+        for (Wager w : wagers){
+            if (w.getId() == id)
+                return w;
+        }
+        return null;
+    }
+
+    void dateValidation(List<OutcomeOdd> outcomeOdds) throws OutcomeOddException {
+        for (int i = 0; i < outcomeOdds.size(); i++){
+            if (i < outcomeOdds.size()-1 && outcomeOdds.get(i).getValidUntil().isAfter(outcomeOdds.get(i+1).getValidFrom())){
+                throw new OutcomeOddException(outcomeOdds.get(i), outcomeOdds.get(i+1));
+            }
+            outcomeOdds.get(i).setOutcome(outcomeOdds.get(i).getOutcome());
+        }
     }
 }

@@ -42,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
         // Set cookie name
         localeResolver.setCookieName("cookie-locale-info");
         // Set default locale value.
-        localeResolver.setDefaultLocale(Locale.ENGLISH);
+        localeResolver.setDefaultLocale(Locale.getDefault());
         // Set cookie max exist time.
         localeResolver.setCookieMaxAge(3600);
 

@@ -20,6 +20,7 @@ public class LoginController {
 
     @Autowired
     MessageSource messageSource;
+
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView getDefaultPage(Locale locale) {
         ModelAndView model = new ModelAndView();
