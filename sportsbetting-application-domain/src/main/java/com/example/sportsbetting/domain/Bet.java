@@ -21,6 +21,8 @@ public class Bet {
     @JoinColumn(name = "event_id")
     private SportEvent event;
 
+    // cascadetype = persistence will propagate (kiterjeszt) to the relating entities
+    // Fetchtype.Eager = load it together with Bet!
     @OneToMany(mappedBy = "bet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Outcome> outcomes; //eg.: number of goals then 0 or 1 or more than 1
 
